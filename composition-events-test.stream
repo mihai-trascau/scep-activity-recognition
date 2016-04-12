@@ -1,0 +1,22 @@
+%% event(pos(work_area, meta(8, 0.4)), 
+%%     [datime(2016, 4, 12, 17, 48, 41, 1), datime(2016, 4, 12, 17, 48, 41, 1)]).
+
+%% event(pos(work_area, meta(9, 0.6)), 
+%%     [datime(2016, 4, 12, 17, 48, 42, 1), datime(2016, 4, 12, 17, 48, 42, 1)]).
+
+%% event(pos(work_area, meta(10, 0.7)), 
+%%     [datime(2016, 4, 12, 17, 48, 43, 1), datime(2016, 4, 12, 17, 48, 43, 1)]).
+
+%% event(pos(work_area, meta(10, 0.6)), 
+%%     [datime(2016, 4, 12, 17, 48, 43, 1), datime(2016, 4, 12, 17, 48, 43, 1)]).
+
+
+event(pos(work_area, meta(8, 0.4)), 
+    [datime(2016, 4, 12, 17, 48, 41, 1), datime(2016, 4, 12, 17, 48, 41, 1)]).
+
+event(pos(work_area, meta(9, 0.6)), 
+    [datime(2016, 4, 12, 17, 48, 41, 2), datime(2016, 4, 12, 17, 48, 41, 2)]).
+
+event(pos(work_area, meta(10, 0.7)), 
+    [datime(2016, 4, 12, 17, 48, 43, 3), datime(2016, 4, 12, 17, 48, 43, 3)]).
+
