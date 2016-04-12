@@ -2,11 +2,10 @@
 print_trigger(all_defined_events).
 
 /*
-    ETALIS FLAGS
+    ETALIS FLAGS - big no no in an event file
 */
-
-set_etalis_flags(store_fired_events,on).
-set_etalis_flags(logging_to_file,on).
+%% set_etalis_flags(store_fired_events,on).
+%% set_etalis_flag(logging_to_file,on).
 
 /*
     CONTEXT FLAGS
@@ -34,36 +33,50 @@ aggr_score(Score1, Score2, Res) :- score_compute_flag(min), Res is min(Score1,Sc
 */
 
 %% Composition of pos(+Location,meta(+LastUpdate,+Confidence)) events
-r1 'rule:' composed(pos(X, meta(T2, Score))) <- pos(X,meta(T1, Score1)) 'seq' pos(X,meta(T2,Score2)) 'where' aggr_score(Score1,Score2,Score).
-r2 'rule:' composed(pos(X, meta(T2, Score))) <- composed(pos(X,meta(T1,Score1))) 'seq' pos(X,meta(T2, Score2))
-                                                'where' (
-                                                    aggr_score(Score1,Score2,Score),
-                                                    retract(composed(pos(X,meta(T1,Score1))))
-                                                ).
-r3 'rule:' composed(pos(X, meta(T2, Score))) <- composed(pos(X,meta(T1,Score1))) 'seq' composed(pos(X,meta(T2, Score2))) 
-                                                'where' (
-                                                    aggr_score(Score1,Score2,Score),
-                                                    retract(composed(pos(X,meta(T1,Score1))))
-                                                ).
-event_rule_property(r1,event_rule_window,5).
-event_rule_property(r2,event_rule_window,5).
-event_rule_property(r3,event_rule_window,5).
+pos_score_diff_threshold(0.3).
+
+r_pos_1 'rule:' pos(X, meta(T2, Score))
+    <- pos(X,meta(T1,Score1)) 'seq' pos(X,meta(T2, Score2)) 
+        'where' (
+            pos_score_diff_threshold(Thresh),
+            abs(Score1 - Score2) < Thresh,
+            aggr_score(Score1,Score2,Score),
+            retract(pos(X,meta(T1,Score1))),
+            retract(pos(X,meta(T2,Score2)))
+        ).
+
+r_pos_2 'rule:' noop_event
+    <- pos(X,meta(T1,Score1))) 'during' pos(X,meta(T, Score))
+        'where' (
+            retract(pos(X,meta(T1,Score1)))
+        ).
+
+event_rule_property(r_pos_1,event_rule_window,5).
+event_rule_property(r_pos_2,event_rule_window,5).
+
+
 
 %% Composition of lla(+LowLevelActivity,meta(+LastUpdate,+Confidence)) events
-r4 'rule:' composed(lla(X, meta(T2, Score))) <- lla(X,meta(T1, Score1)) 'seq' lla(X,meta(T2,Score2)) 'where' aggr_score(Score1,Score2,Score).
-r5 'rule:' composed(lla(X, meta(T2, Score))) <- composed(lla(X,meta(T1,Score1))) 'seq' lla(X,meta(T2, Score2))
-                                                'where' (
-                                                    aggr_score(Score1,Score2,Score),
-                                                    retract(composed(lla(X,meta(T1,Score1))))
-                                                ).
-r6 'rule:' composed(lla(X, meta(T2, Score))) <- composed(lla(X,meta(T1,Score1))) 'seq' composed(lla(X,meta(T2, Score2))) 
-                                                'where' (
-                                                    aggr_score(Score1,Score2,Score),
-                                                    retract(composed(lla(X,meta(T1,Score1))))
-                                                ).
-event_rule_property(r4,event_rule_window,5).
-event_rule_property(r5,event_rule_window,5).
-event_rule_property(r6,event_rule_window,5).
+lla_score_diff_threshold(0.3).
+
+r_lla_1 'rule:' lla(X, meta(T2, Score))
+    <- lla(X,meta(T1,Score1)) 'seq' lla(X,meta(T2, Score2)) 
+        'where' (
+            lla_score_diff_threshold(Thresh),
+            abs(Score1 - Score2) < Thresh,
+            aggr_score(Score1,Score2,Score),
+            retract(lla(X,meta(T1,Score1))),
+            retract(lla(X,meta(T2,Score2)))
+        ).
+
+r_lla_2 'rule:' noop_event
+    <- lla(X,meta(T1,Score1))) 'during' lla(X,meta(T, Score))
+        'where' (
+            retract(lla(X,meta(T1,Score1)))
+        ).
+
+event_rule_property(r_lla_1,event_rule_window,5).
+event_rule_property(r_lla_2,event_rule_window,5).
 
 /*
     DOMAIN RULES
