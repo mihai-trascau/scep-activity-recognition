@@ -1,11 +1,6 @@
 %% print_trigger(_/_).
-print_trigger(all_defined_events).
-
-/*
-    ETALIS FLAGS - big no no in an event file
-*/
-%% set_etalis_flags(store_fired_events,on).
-%% set_etalis_flag(logging_to_file,on).
+%% print_trigger(all_defined_events).
+print_trigger(pos/2).
 
 /*
     CONTEXT FLAGS
@@ -32,32 +27,34 @@ aggr_score(Score1, Score2, Res) :- score_compute_flag(min), Res is min(Score1,Sc
     CONTEXT MANAGEMENT RULES
 */
 
-%% Composition of pos(+Location,meta(+LastUpdate,+Confidence)) events
-pos_score_diff_threshold(0.3).
+%% Validity extension of pos(+Location,meta(+LastUpdate,+Confidence)) events
+%% pos_score_diff_threshold(Thresh),
+%% abs(Score1 - Score2) < Thresh,
+%% retract(pos(X,meta(T1,Score1))),
+%% retract(pos(X,meta(T2,Score2)))
+pos_score_diff_threshold(0.99).
 
-r_pos_1 'rule:' pos(X, meta(T2, Score))
-    <- pos(X,meta(T1,Score1)) 'seq' pos(X,meta(T2, Score2)) 
+r_pos_1 'rule:' pos(X, meta([L1,L2], Score))
+    <- pos(X,meta(L1,Score1)) 'seq' pos(X,meta(L2, Score2))
         'where' (
             pos_score_diff_threshold(Thresh),
             abs(Score1 - Score2) < Thresh,
-            aggr_score(Score1,Score2,Score),
-            retract(pos(X,meta(T1,Score1))),
-            retract(pos(X,meta(T2,Score2)))
+            aggr_score(Score1,Score2,Score)
         ).
 
-r_pos_2 'rule:' noop_event
-    <- pos(X,meta(T1,Score1))) 'during' pos(X,meta(T, Score))
-        'where' (
-            retract(pos(X,meta(T1,Score1)))
-        ).
+%% r_pos_2 'rule:' noop_event
+%%     <- pos(X,meta(T1,Score1)) 'during' pos(X,meta(T, Score))
+%%         'where' (
+%%             retract(pos(X,meta(T1,Score1)))
+%%         ).
 
-event_rule_property(r_pos_1,event_rule_window,5).
-event_rule_property(r_pos_2,event_rule_window,5).
+%% event_rule_property(r_pos_1,event_rule_window,3).
+%% event_rule_property(r_pos_2,event_rule_window,5).
 
 
 
 %% Composition of lla(+LowLevelActivity,meta(+LastUpdate,+Confidence)) events
-lla_score_diff_threshold(0.3).
+lla_score_diff_threshold(0.9).
 
 r_lla_1 'rule:' lla(X, meta(T2, Score))
     <- lla(X,meta(T1,Score1)) 'seq' lla(X,meta(T2, Score2)) 
@@ -70,7 +67,7 @@ r_lla_1 'rule:' lla(X, meta(T2, Score))
         ).
 
 r_lla_2 'rule:' noop_event
-    <- lla(X,meta(T1,Score1))) 'during' lla(X,meta(T, Score))
+    <- lla(X,meta(T1,Score1)) 'during' lla(X,meta(T, Score))
         'where' (
             retract(lla(X,meta(T1,Score1)))
         ).
