@@ -1,41 +1,67 @@
-%% event(pos(work_area, meta(1, 0.8)),
-%%     [datime(2016, 4, 12, 17, 48, 41, 1), datime(2016, 4, 12, 17, 48, 41, 1)]).
-
-%% event(pos(work_area, meta(2, 0.4)),
-%%     [datime(2016, 4, 12, 17, 48, 42, 1), datime(2016, 4, 12, 17, 48, 42, 1)]).
-
-%% event(pos(work_area, meta(3, 0.6)),
-%%     [datime(2016, 4, 12, 17, 48, 43, 1), datime(2016, 4, 12, 17, 48, 43, 1)]).
-
-%% event(pos(work_area, meta(4, 0.2)), 
-%%     [datime(2016, 4, 12, 17, 48, 44, 1), datime(2016, 4, 12, 17, 48, 44, 1)]).
-
-%% event(pos(work_area, meta(5, 0.8)), 
-%%     [datime(2016, 4, 12, 17, 48, 45, 1), datime(2016, 4, 12, 17, 48, 45, 1)]).
-
-%% event(pos(work_area, meta(6, 0.6)), 
-%%     [datime(2016, 4, 12, 17, 48, 46, 1), datime(2016, 4, 12, 17, 48, 46, 1)]).
-
-%% event(pos(work_area, meta(7, 0.8)), 
-%%     [datime(2016, 4, 12, 17, 48, 47, 1), datime(2016, 4, 12, 17, 48, 47, 1)]).
-
-event(pos(work_area, meta([1], 0.8)),
+%% ----- TEST 1 --------------------------------------------------------------
+event(pos(work_area, meta(1, 0.8)),
     [datime(2016, 4, 12, 17, 48, 41, 1), datime(2016, 4, 12, 17, 48, 41, 1)]).
 
-event(pos(work_area, meta([2], 0.4)),
+event(pos(work_area, meta(2, 0.4)),
     [datime(2016, 4, 12, 17, 48, 42, 1), datime(2016, 4, 12, 17, 48, 42, 1)]).
 
-event(pos(work_area, meta([3], 0.6)),
+event(pos(work_area, meta(3, 0.6)),
     [datime(2016, 4, 12, 17, 48, 43, 1), datime(2016, 4, 12, 17, 48, 43, 1)]).
 
-event(pos(work_area, meta([4], 0.2)), 
+event(pos(work_area, meta(4, 0.2)), 
     [datime(2016, 4, 12, 17, 48, 44, 1), datime(2016, 4, 12, 17, 48, 44, 1)]).
 
-event(pos(work_area, meta([5], 0.8)), 
+event(pos(work_area, meta(5, 0.8)), 
+    [datime(2016, 4, 12, 17, 48, 50, 1), datime(2016, 4, 12, 17, 48, 50, 1)]).
+
+event(pos(work_area, meta(6, 0.6)), 
+    [datime(2016, 4, 12, 17, 48, 51, 1), datime(2016, 4, 12, 17, 48, 51, 1)]).
+
+event(pos(work_area, meta(7, 0.8)), 
+    [datime(2016, 4, 12, 17, 48, 52, 1), datime(2016, 4, 12, 17, 48, 52, 1)]).
+
+event(pos(work_area, meta(8, 0.6)), 
+    [datime(2016, 4, 12, 17, 48, 53, 1), datime(2016, 4, 12, 17, 48, 53, 1)]).
+
+%% ----- TEST 2 --------------------------------------------------------------
+event(pos(work_area, meta(1, 0.8)),
+    [datime(2016, 4, 12, 17, 48, 41, 1), datime(2016, 4, 12, 17, 48, 41, 1)]).
+
+event(pos(work_area, meta(2, 0.4)),
+    [datime(2016, 4, 12, 17, 48, 42, 1), datime(2016, 4, 12, 17, 48, 42, 1)]).
+
+event(pos(work_area, meta(3, 0.6)),
+    [datime(2016, 4, 12, 17, 48, 43, 1), datime(2016, 4, 12, 17, 48, 43, 1)]).
+
+event(pos(work_area, meta(4, 0.2)), 
+    [datime(2016, 4, 12, 17, 48, 44, 1), datime(2016, 4, 12, 17, 48, 44, 1)]).
+
+event(pos(work_area, meta(5, 0.8)), 
     [datime(2016, 4, 12, 17, 48, 45, 1), datime(2016, 4, 12, 17, 48, 45, 1)]).
 
-event(pos(work_area, meta([6], 0.6)), 
+event(pos(work_area, meta(6, 0.6)), 
     [datime(2016, 4, 12, 17, 48, 46, 1), datime(2016, 4, 12, 17, 48, 46, 1)]).
 
-event(pos(work_area, meta([7], 0.8)), 
+event(pos(work_area, meta(7, 0.8)), 
     [datime(2016, 4, 12, 17, 48, 47, 1), datime(2016, 4, 12, 17, 48, 47, 1)]).
+
+event(pos(work_area, meta(8, 0.6)), 
+    [datime(2016, 4, 12, 17, 48, 48, 1), datime(2016, 4, 12, 17, 48, 48, 1)]).
+
+%% ----- TEST 3 -----------------------
+%% event(pos(work_area, meta(1, 0.8))).
+%% sleep(1).
+%% event(pos(work_area, meta(2, 0.4))).
+%% sleep(1).
+%% event(pos(work_area, meta(3, 0.6))).
+%% sleep(1).
+%% event(pos(work_area, meta(4, 0.2))).
+%% sleep(3).
+%% event(pos(work_area, meta(5, 0.8))).
+%% sleep(1).
+%% event(pos(work_area, meta(6, 0.6))).
+%% sleep(1).
+%% event(pos(work_area, meta(7, 0.8))).
+%% sleep(1).
+%% event(pos(work_area, meta(8, 0.6))).
+%% sleep(1).
