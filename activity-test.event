@@ -34,8 +34,41 @@ aggr_score(Score1, Score2, Res) :- score_compute_flag(min), Res is min(Score1,Sc
 %% retract(pos(X,meta(T2,Score2)))
 pos_score_diff_threshold(0.99).
 
+r_pos_4 'rule:' noop_event
+    <- (pos(X,meta(L1,Score1)) timestamp t1(T1),t2(T2)) 'and' (pos(X,meta(L2, Score2)) timestamp t1(T3),t2(T4))
+        'where' (
+            less_datime(T1,T3),
+            less_datime(T4,T2),
+            pos_score_diff_threshold(Thresh),
+            abs(Score1 - Score2) < Thresh,
+        )
+        'do' (
+            retract(pos(X,meta(L2, Score2)))
+        ).
+
+
+r_pos_3 'rule:' pos(X, meta([L1,L2], Score))
+    <- (pos(X,meta(L1,Score1)) timestamp t1(T1),t2(T2)) 'seq' (pos(X,meta(L2, Score2)) timestamp t1(T3),t2(T4))
+        'where' (
+            not(T1==T2), 
+            not(T3==T4),
+            pos_score_diff_threshold(Thresh),
+            abs(Score1 - Score2) < Thresh,
+            aggr_score(Score1,Score2,Score)
+        ).
+
+
+r_pos_2 'rule:' pos(X, meta([L1,L2], Score))
+    <- (pos(X,meta(L1,Score1)) timestamp t1(T1),t2(T2)) 'seq' (pos(X,meta(L2, Score2)) timestamp t1(T3),t2(T3))
+        'where' (
+            not(T1==T2),
+            pos_score_diff_threshold(Thresh),
+            abs(Score1 - Score2) < Thresh,
+            aggr_score(Score1,Score2,Score)
+        ).
+
 r_pos_1 'rule:' pos(X, meta([L1,L2], Score))
-    <- pos(X,meta(L1,Score1)) 'seq' pos(X,meta(L2, Score2))
+    <- (pos(X,meta(L1,Score1)) timestamp t1(T1),t2(T1)) 'seq' (pos(X,meta(L2, Score2)) timestamp t1(T2),t2(T2))
         'where' (
             pos_score_diff_threshold(Thresh),
             abs(Score1 - Score2) < Thresh,
@@ -48,8 +81,9 @@ r_pos_1 'rule:' pos(X, meta([L1,L2], Score))
 %%             retract(pos(X,meta(T1,Score1)))
 %%         ).
 
-%% event_rule_property(r_pos_1,event_rule_window,3).
-%% event_rule_property(r_pos_2,event_rule_window,5).
+%event_rule_property(r_pos_1,event_rule_window,1).
+%event_rule_property(r_pos_2,event_rule_window,1).
+%event_rule_property(r_pos_3,event_rule_window,1).
 
 
 
