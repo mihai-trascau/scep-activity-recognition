@@ -5,7 +5,7 @@ from scipy.stats import rv_discrete
 from utils import GaussianPosTransition
 
 DEFAULT_DURATION         = 10
-DEFAULT_OVERLAP_DURATION = 2
+DEFAULT_NON_OVERLAP_DURATION = 2
 
 DEFAULT_UPDATE_STEP = 1
 DEFAULT_DELTA_STEP  = 1
@@ -32,7 +32,13 @@ class AtomicEvent(object):
 
     @staticmethod
     def get_tp_certainty_value(mu, sigma):
-        # generate certainty from normal distribution: lower cap at 0.65, upper cap at 1.0
+        '''
+        Generate AtomicEvent certainty value from a normal distribution given mean and standard deviation. Function used to generate
+        true instances => certainties are capped to the interval [0.65, 1.00]
+        :param mu: mean of normal distribution
+        :param sigma: standard deviation of normal distribution
+        :return: The certainty value for the case of a correct event detection.
+        '''
         if mu < 0.65 or mu > 1:
             return 0.85
 
@@ -46,7 +52,13 @@ class AtomicEvent(object):
 
     @staticmethod
     def get_fp_certainty_value(mu, sigma):
-        # generate certainty from normal distribution: lower cap at 0.2, upper cap at 0.5
+        '''
+        Generate AtomicEvent certainty value from a normal distribution given mean and standard deviation. Function used to generate
+        false instances => certainties are capped to the interval [0.2, 0.5]
+        :param mu: mean of normal distribution
+        :param sigma: standard deviation of normal distribution
+        :return: The certainty value for the case of an incorrect event detection.
+        '''
         if mu < 0.2 or mu > 0.5:
             return 0.35
 
@@ -60,17 +72,27 @@ class AtomicEvent(object):
 
     @staticmethod
     def to_datime(timestamp):
+        '''
+        Convert UNIX timestamp to ETALIS datime form
+        :param timestamp: UNIX timestamp
+        :return:
+        '''
         return "datime" + "(" \
-                + timestamp.year + ", " \
-                + timestamp.month + ", " \
-                + timestamp.day + ", " \
-                + timestamp.hour + ", " \
-                + timestamp.minute + ", " \
-                + timestamp.second + ", " \
+                + str(timestamp.year) + ", " \
+                + str(timestamp.month) + ", " \
+                + str(timestamp.day) + ", " \
+                + str(timestamp.hour) + ", " \
+                + str(timestamp.minute) + ", " \
+                + str(timestamp.second) + ", " \
                 + "1" \
                 + ")"
 
+
     def meta_to_etalis(self):
+        '''
+        Generate meta-properties structure in ETALIS form for AtomicEvent
+        :return:
+        '''
         etalis_form = "meta"
         etalis_form += "("
         etalis_form += str((self.timestamp - datetime.datetime(1970,1,1)).total_seconds())
@@ -86,6 +108,10 @@ class AtomicEvent(object):
         return None
 
     def to_etalis(self):
+        '''
+        Generate event structure in ETALIS form for AtomicEvent
+        :return:
+        '''
         etalis_form = "event"
         etalis_form += "("
 
@@ -193,9 +219,12 @@ class HLA(object):
                  lla_step = DEFAULT_UPDATE_STEP, pos_step = DEFAULT_UPDATE_STEP,
                  accepted_combinations = None):
 
+        ## type of the HLA (from Mihai's classification) and name of person carrying out the activity
         self.type = type
         self.person = person
 
+        ## start time of the activity (as UNIX timestamp), duration of activity (in seconds)
+        ## update step for generated LLAs (in seconds), update step for generated Positions (in seconds)
         self.start_time = start_time
         self.duration = duration
         self.lla_step = lla_step
@@ -206,21 +235,44 @@ class HLA(object):
         self._preceded_by = None
 
         ## HLA generation flags
+        '''
+        This flag applies only to UNDEFINED HLAs
+        Indicates whether the transition between one HLA and another is composed of several interweaving WALKING and STANDING LLAs of various certainties,
+        detected at different positions of the AmI-Lab. Default value is FALSE, meaning the transition is simple: only the WALKING LLA is used, with a gradual
+        _shift_ in the certainty of the detected Position from the previous HLA to the the following one.
+        '''
         self.complex_transition = False
 
+        '''
+        These flags apply only to defined HLAs. They stipulate the error rate in LLA and Position detection certainty.
+        NOTE: the flags determine ONLY the error probability for the LLAs and Positions defining the current HLA.
+        '''
         self.lla_error_rate = 0
         self.pos_error_rate = 0
 
+        '''
+        These flags apply only to defined HLAs. They determine the probability that a "false" LLA or Position are detected instead of the correct ones
+        for the current HLA.
+        '''
         self.lla_false_detect_rate = 0
         self.pos_false_detect_rate = 0
 
-        ## list of accepted LLAs position compositions and the accepted position
+        ## list of accepted (LLA, Position) compositions
         self.accepted_combinations = accepted_combinations
 
-        ## the actual chosen position and LLA combination that activates this HLA
-        self.active_pos = None
-        self.active_lla = None
+        ## Select the actual chosen position and LLA from the available combinations allowed for this HLA
+        self._select_active_combination()
 
+
+    def _select_active_combination(self):
+        if self.accepted_combinations:
+            comb_idx = random.randint(0, len(self.accepted_combinations) - 1)
+            self.active_pos = self.accepted_combinations[comb_idx]['position']
+            self.active_lla = self.accepted_combinations[comb_idx]['lla']
+
+    '''
+    Getters and setter for HLAs preceding and following the current one
+    '''
     @property
     def followed_by(self):
         return self._followed_by
@@ -228,7 +280,8 @@ class HLA(object):
     @followed_by.setter
     def followed_by(self, hla):
         self._followed_by = hla
-        hla.preceded_by = self
+        if hla.preceded_by is None or hla.preceded_by != self:
+            hla.preceded_by = self
 
     @property
     def preceded_by(self):
@@ -237,27 +290,41 @@ class HLA(object):
     @preceded_by.setter
     def preceded_by(self, hla):
         self._preceded_by = hla
-        hla.followed_by = self
+        if hla.followed_by is None or hla.followed_by != self:
+            hla.followed_by = self
 
 
     @staticmethod
-    def generate_overlap_transition(pos_type, lla_type, current_ts, overlap_duration, pos_step, lla_step, person):
+    def generate_non_overlap_transition(pos_type, lla_type, current_ts, non_overlap_duration, pos_step, lla_step, person):
+        '''
+        Auxiliary function for UNDEFINED HLA generation.
+        Generate a sequence of AtomicEvents of type WALKING for the Position from/to which the subject is transitioning (e.g. from WORK_AREA to CONFERENCE_AREA).
+        This sequence will be detected with high certainty and is not subject to overlap with other detected Positions.
+        :param pos_type:    Position from/to which the subject is transitioning.
+        :param lla_type:    Type of LLA used for transitioning. Default is always WALKING.
+        :param current_ts:  Start of the non-overlap interval.
+        :param non_overlap_duration:    Duration of the non-overlap interval
+        :param pos_step:    update step for generated Positions (in seconds)
+        :param lla_step:    update step for generated LLAs (in seconds)
+        :param person:      name of subject carrying out the actions
+        :return:    List of generated LLA and Position AtomicEvents
+        '''
         event_list = []
 
         ts_pos = ts_lla = current_ts
         computed_duration = 0
 
-        while computed_duration <= overlap_duration:
+        while computed_duration < non_overlap_duration:
             ts_limit = current_ts + datetime.timedelta(seconds=DEFAULT_DELTA_STEP)
-            while (ts_pos <= ts_limit or ts_lla <= ts_limit):
-                if ts_pos <= ts_limit:
+            while (ts_pos < ts_limit or ts_lla < ts_limit):
+                if ts_pos < ts_limit:
                     cert = AtomicEvent.get_tp_certainty_value(DEFAULT_TP_MU, DEFAULT_TP_SIGMA)
                     pos = Position(type=pos_type, person=person, timestamp=ts_pos, certainty=cert)
                     event_list.append(pos)
 
                 ts_pos = ts_pos + datetime.timedelta(seconds=pos_step)
 
-                if ts_lla <= ts_limit:
+                if ts_lla < ts_limit:
                     cert = AtomicEvent.get_tp_certainty_value(DEFAULT_TP_MU, DEFAULT_TP_SIGMA)
                     lla = LLA(type=lla_type, person=person, timestamp=ts_lla, certainty=cert)
                     event_list.append(lla)
@@ -272,12 +339,27 @@ class HLA(object):
 
     @staticmethod
     def generate_simple_rampdown_transition(pos_type, lla_type, start_time, duration, pos_step, lla_step, person):
+        '''
+        Auxiliary function for UNDEFINED HLA generation.
+        Generate a sequence of AtomicEvents of type WALKING from the Position FROM which the subject is transitioning.
+        Certainty of detected Postion is in continuous decrease along a Gaussian curve.
+        The position events in this sequence will overlap with the ones in the :func:`generate_simple_rampup_transition <events.HLA.generate_simple_rampup_transition>`
+        :param pos_type:
+        :param lla_type:
+        :param start_time:
+        :param duration:
+        :param pos_step:
+        :param lla_step:
+        :param person:
+        :return:
+        '''
         aux_events = []
 
         end_time = start_time + datetime.timedelta(seconds=duration)
 
-        pos_metas = GaussianPosTransition(start_time=start_time, end_time=end_time,
+        transition_gen = GaussianPosTransition(start_time=start_time, end_time=end_time,
                                                delta=pos_step, max_value=DEFAULT_TP_MU, right_only=True)
+        pos_metas = transition_gen.generate()
 
         # generate Position events according to their step and add them to the aux list
         for meta in pos_metas:
@@ -287,11 +369,11 @@ class HLA(object):
 
         # generate LLA events according to their step and add them to the aux list
         computed_duration = 0
-        current_ts = start_time
+        ts_lla = current_ts = start_time
 
-        while computed_duration <= duration:
+        while computed_duration < duration:
             ts_limit = current_ts + datetime.timedelta(seconds=DEFAULT_DELTA_STEP)
-            while ts_lla <= ts_limit:
+            while ts_lla < ts_limit:
                 cert = AtomicEvent.get_tp_certainty_value(DEFAULT_TP_MU, DEFAULT_TP_SIGMA)
                 lla = LLA(type=lla_type, person=person, timestamp=ts_lla, certainty=cert)
                 aux_events.append(lla)
@@ -308,12 +390,27 @@ class HLA(object):
 
     @staticmethod
     def generate_simple_rampup_transition(pos_type, lla_type, start_time, duration, pos_step, lla_step, person):
+        '''
+        Auxiliary function for UNDEFINED HLA generation.
+        Generate a sequence of AtomicEvents of type WALKING from the Position TO which the subject is transitioning.
+        Certainty of detected Postion is in continuous increase along a Gaussian curve.
+        The position events in this sequence will overlap with the ones in the :func:`generate_simple_rampdown_transition <events.HLA.generate_simple_ramdown_transition>`
+        :param pos_type:
+        :param lla_type:
+        :param start_time:
+        :param duration:
+        :param pos_step:
+        :param lla_step:
+        :param person:
+        :return:
+        '''
         aux_events = []
 
         end_time = start_time + datetime.timedelta(seconds=duration)
 
-        pos_metas = GaussianPosTransition(start_time=start_time, end_time=end_time,
+        transition_gen = GaussianPosTransition(start_time=start_time, end_time=end_time,
                                                delta=pos_step, max_value=DEFAULT_TP_MU, left_only=True)
+        pos_metas = transition_gen.generate()
 
         # generate Position events according to their step and add them to the aux list
         for meta in pos_metas:
@@ -323,11 +420,11 @@ class HLA(object):
 
         # generate LLA events according to their step and add them to the aux list
         computed_duration = 0
-        current_ts = start_time
+        ts_lla = current_ts = start_time
 
-        while computed_duration <= duration:
+        while computed_duration < duration:
             ts_limit = current_ts + datetime.timedelta(seconds=DEFAULT_DELTA_STEP)
-            while ts_lla <= ts_limit:
+            while ts_lla < ts_limit:
                 cert = AtomicEvent.get_tp_certainty_value(DEFAULT_TP_MU, DEFAULT_TP_SIGMA)
                 lla = LLA(type=lla_type, person=person, timestamp=ts_lla, certainty=cert)
                 aux_events.append(lla)
@@ -344,8 +441,14 @@ class HLA(object):
 
 
     def generate(self, with_sleep = False):
+        '''
+        Main event generation function for current HLA.
+        :param with_sleep: Specifies if sleep(x) statements are inserted in final event stream output. Default FALSE.
+        :return:
+        '''
         event_list = []
 
+        ## generate discrete distributions from which to sample for error_rate and false_detect_rate flags
         pos_error_distrib = rv_discrete(values=([True, False], [self.pos_error_rate, 1 - self.pos_error_rate]))
         lla_error_distrib = rv_discrete(values=([True, False], [self.lla_error_rate, 1 - self.lla_error_rate]))
 
@@ -353,6 +456,7 @@ class HLA(object):
         lla_fd_distrib = rv_discrete(values=([True, False], [self.lla_false_detect_rate, 1 - self.lla_false_detect_rate]))
 
         if not with_sleep:
+            ## Handle generation for UNDEFINED HLA
             if self.type == HLA.UNDEFINED:
                 if self.complex_transition:
                     raise NotImplementedError("Complex HLA Transitions not implemented yet!")
@@ -360,6 +464,7 @@ class HLA(object):
                     ''' In this case we only generate the WALKING LLA and alter the start and end positions according to the previous and next HLAs'''
                     transition_start = self.start_time
 
+                    ## determine previous and next Positions
                     prev_pos = next_pos = None
                     if self._preceded_by:
                         prev_pos = self._preceded_by.active_pos
@@ -367,55 +472,72 @@ class HLA(object):
                     if self._followed_by:
                         next_pos = self._followed_by.active_pos
 
-                    if prev_pos:
-                        ## generate overlap events
-                        aux_overlap_events, transition_start = HLA.generate_overlap_transition(prev_pos, LLA.WALKING, transition_start, DEFAULT_OVERLAP_DURATION, self.pos_step, self.lla_step, self.person)
+                    aux_list = []
 
-                        ## generate rampdown GaussionPosTransition for duration of UNDEFINED event ////////
+                    if prev_pos:
+                        ## generate non-overlap events - basically continue detecting the previous HLA Position with high certainty, BUT with WALKING LLA
+                        aux_overlap_events, transition_start = HLA.generate_non_overlap_transition(prev_pos, LLA.WALKING, transition_start, DEFAULT_NON_OVERLAP_DURATION, self.pos_step, self.lla_step, self.person)
+
+                        ## generate rampdown GaussionPosTransition for duration of UNDEFINED event
                         aux_rampdown_events = HLA.generate_simple_rampdown_transition(prev_pos, LLA.WALKING, transition_start, self.duration, self.pos_step, self.lla_step, self.person)
 
-                        event_list.extend(aux_overlap_events)
-                        event_list.extend(aux_rampdown_events)
+                        aux_list.extend(aux_overlap_events)
+                        aux_list.extend(aux_rampdown_events)
 
                     if next_pos:
                         ## generate rampup events
                         aux_rampup_events, transition_start = HLA.generate_simple_rampup_transition(next_pos, LLA.WALKING, transition_start, self.duration, self.pos_step, self.lla_step, self.person)
 
-                        ## generate overlap events
-                        aux_overlap_events, transition_end = HLA.generate_overlap_transition(next_pos, LLA.WALKING, transition_start, DEFAULT_OVERLAP_DURATION, self.pos_step, self.lla_step, self.person)
+                        ## generate non-overlap events - basically detect the next HLA Position with high certainty, with WALKING LLA
+                        aux_overlap_events, transition_end = HLA.generate_non_overlap_transition(next_pos, LLA.WALKING, transition_start, DEFAULT_NON_OVERLAP_DURATION, self.pos_step, self.lla_step, self.person)
 
-                        event_list.extend(aux_rampup_events)
-                        event_list.extend(aux_overlap_events)
+                        aux_list.extend(aux_rampup_events)
+                        aux_list.extend(aux_overlap_events)
 
+                    ## gather all transition events in aux list and sort them by timestamp
+                    aux_list.sort(key=lambda ev: ev.timestamp)
+
+                    ## insert transition events in global event stream list
+                    event_list.extend(aux_list)
+
+            ## Handle generation for defined HLA
             else:
-                if self.accepted_combinations:
-                    comb_idx = random.randint(0, len(self.accepted_combinations) - 1)
-                    self.active_pos = self.accepted_combinations[comb_idx]['position']
-                    self.active_lla = self.accepted_combinations[comb_idx]['lla']
-
+                ## We can only generate smth if we have valid Position and LLA instances
+                if self.active_pos and self.active_lla:
                     computed_duration = 0
                     ts_pos = ts_lla = current_ts = self.start_time
 
                     while True:
-                        if computed_duration <= self.duration:
+                        ## loop while duration of event not exhausted
+                        if computed_duration < self.duration:
+                            ## we advance in time increments of DEFAULT_DELTA_STEP duration
                             ts_limit = current_ts + datetime.timedelta(seconds=DEFAULT_DELTA_STEP)
 
-                            while (ts_pos <= ts_limit or ts_lla <= ts_limit):
+                            while ts_pos < ts_limit or ts_lla < ts_limit:
+                                ## Position and LLA events have their own generation rate (governed by pos_step and lla_step).
+                                ## For each DEFAULT_DELTA_STEP increment of the main loop, we check to see how many new LLA and Position events can be generated (may be 0)
                                 ''' ======== Generate position event if possible ======== '''
-                                if ts_pos <= ts_limit:
+                                if ts_pos < ts_limit:
+                                    ## sample probability of Position certainty error
                                     pos_error = pos_error_distrib.rvs()
+
+                                    ## sample probability of false Position detection error
                                     pos_fd = pos_fd_distrib.rvs()
 
                                     if not pos_error:
+                                        ## generate high certainty Position event
                                         cert = AtomicEvent.get_tp_certainty_value(DEFAULT_TP_MU, DEFAULT_TP_SIGMA)
                                         pos = Position(type=self.active_pos, person = self.person, timestamp=ts_pos, certainty=cert)
                                         event_list.append(pos)
                                     else:
+                                        ## generate low certainty Position event
                                         cert = AtomicEvent.get_fp_certainty_value(DEFAULT_FP_MU, DEFAULT_FP_SIGMA)
                                         pos = Position(type=self.active_pos, person=self.person, timestamp=ts_pos, certainty=cert)
                                         event_list.append(pos)
 
+                                        ## if false detection flag enabled
                                         if pos_fd:
+                                            ## generate a falsely detected Position event according to "reasonable false positives" (see ADJACENCY dict for each Position)
                                             false_pos_types = Position.AREA_ADJACENCY.get(self.active_pos)
                                             if false_pos_types:
                                                 idx = random.randint(0, len(false_pos_types) - 1)
@@ -429,20 +551,27 @@ class HLA(object):
 
 
                                 ''' ======== Generate LLA event if possible ======== '''
-                                if ts_lla <= ts_limit:
+                                if ts_lla < ts_limit:
+                                    ## sample probability of LLA certainty error
                                     lla_error = lla_error_distrib.rvs()
+
+                                    ## sample probability of false LLA detection error
                                     lla_fd = lla_fd_distrib.rvs()
 
                                     if not lla_error:
+                                        ## generate high certainty LLA event
                                         cert = AtomicEvent.get_tp_certainty_value(DEFAULT_TP_MU, DEFAULT_TP_SIGMA)
                                         lla = LLA(type=self.active_lla, person=self.person, timestamp=ts_lla, certainty=cert)
                                         event_list.append(lla)
                                     else:
+                                        ## generate low certainty LLA event
                                         cert = AtomicEvent.get_tp_certainty_value(DEFAULT_FP_MU, DEFAULT_FP_SIGMA)
                                         lla = LLA(type=self.active_lla, person=self.person, timestamp=ts_lla, certainty=cert)
                                         event_list.append(lla)
 
+                                        ## if false detection flag enabled
                                         if lla_fd:
+                                            ## generate a falsely detected LLA event according to "reasonable false positives" (see ADJACENCY dict for each LLA)
                                             false_llas = LLA.LLA_ADJACENCY.get(self.active_lla)
                                             if false_llas:
                                                 idx = random.randint(0, len(false_llas) - 1)
@@ -454,15 +583,17 @@ class HLA(object):
 
                                     ts_lla = ts_lla + datetime.timedelta(seconds=self.lla_step)
 
-
+                            ## increment main loop current timestamp and increment total HLA duration
                             current_ts = ts_limit
                             computed_duration += DEFAULT_DELTA_STEP
                         else:
+                            ## break once desired duration of HLA has been attained
                             break
 
                 else:
                     raise ValueError("No accepted LLA-position combinations for non-undefined HLA!!!")
 
+            ## return event stream list
             return event_list
         else:
             raise NotImplementedError("HLA generation with sleep statements between events not implemented!")
