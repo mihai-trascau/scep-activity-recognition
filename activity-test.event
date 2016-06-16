@@ -1,5 +1,6 @@
 %% print_trigger(_/_).
-print_trigger(all_defined_events).
+%% print_trigger(all_defined_events).
+%% print_trigger(hla/_).
 
 /*
     CONTEXT FLAGS
@@ -25,18 +26,22 @@ aggr_score(Score1, Score2, Res) :- score_compute_flag(min), Res is min(Score1,Sc
 */
 
 %% POSITION DATA
-pos_score_diff_threshold(0.99).
+pos_score_diff_threshold(0.5).
+pos_score_valid_threshold(0.5).
 pos_max_rule_window(2).
 
 %% Validity extension of atomic pos(+Location,meta(+LastUpdate,+Confidence))
 %% events, when no complex event (extended interval) is available for extension
-r_pos_1 'rule:' pos(X,meta(L2, Score))
-    <-  (pos(X,meta(L1,Score1)) 'timestamp' t1(T1), t2(T1))
+r_pos_1 'rule:' pos(U,X,meta(L2, Score))
+    <-  (pos(U,X,meta(L1,Score1)) 'timestamp' t1(T1), t2(T1))
         'seq'
-        (pos(X,meta(L2,Score2)) 'timestamp' t1(T2), t2(T2))
+        (pos(U,X,meta(L2,Score2)) 'timestamp' t1(T2), t2(T2))
         'fnot'
-        (pos(X,meta(_,_)) 'timestamp' t1(T3), t2(T1), less_datime(T3,T1))
+        (pos(U,X,meta(_,_)) 'timestamp' t1(T3), t2(T1), less_datime(T3,T1))
         'where' (
+            pos_score_valid_threshold(ValidThresh),
+            Score1 > ValidThresh,
+            Score2 > ValidThresh,
             pos_score_diff_threshold(Thresh),
             abs(Score1 - Score2) < Thresh,
             aggr_score(Score1,Score2,Score)
@@ -44,11 +49,13 @@ r_pos_1 'rule:' pos(X,meta(L2, Score))
 
 %% Validity extension of a complex pos(+Location,meta(+LastUpdate,+Confidence))
 %% event with a newly added atomic event, subject to rule window constraints
-r_pos_2 'rule:' pos(X,meta(L2, Score))
-    <-  (pos(X,meta(L1,Score1)) 'timestamp' t1(T1), t2(T2), less_datime(T1,T2))
+r_pos_2 'rule:' pos(U,X,meta(L2, Score))
+    <-  (pos(U,X,meta(L1,Score1)) 'timestamp' t1(T1), t2(T2), less_datime(T1,T2))
         'seq'
-        (pos(X,meta(L2,Score2)) 'timestamp' t1(T3), t2(T3))
+        (pos(U,X,meta(L2,Score2)) 'timestamp' t1(T3), t2(T3))
         'where' (
+            pos_score_valid_threshold(ValidThresh),
+            Score2 > ValidThresh,
             pos_max_rule_window(MaxTDiff),
             datime_minus_datime(T3,T2,TDiff),
             TDiff =< MaxTDiff,
@@ -58,18 +65,22 @@ r_pos_2 'rule:' pos(X,meta(L2, Score))
         ).
 
 %% LOW LEVEL ACTIVITY DATA
-lla_score_diff_threshold(0.9).
+lla_score_diff_threshold(0.5).
+lla_score_valid_threshold(0.5).
 lla_max_rule_window(2).
 
 %% Validity extension of atomic lla(+Activity,meta(+LastUpdate,+Confidence))
 %% events, when no complex event (extended interval) is available for extension
-r_lla_1 'rule:' lla(X,meta(L2, Score))
-    <-  (lla(X,meta(L1,Score1)) 'timestamp' t1(T1), t2(T1))
+r_lla_1 'rule:' lla(U,X,meta(L2, Score))
+    <-  (lla(U,X,meta(L1,Score1)) 'timestamp' t1(T1), t2(T1))
         'seq'
-        (lla(X,meta(L2,Score2)) 'timestamp' t1(T2), t2(T2))
+        (lla(U,X,meta(L2,Score2)) 'timestamp' t1(T2), t2(T2))
         'fnot'
-        (lla(X,meta(_,_)) 'timestamp' t1(T3), t2(T1), less_datime(T3,T1))
+        (lla(U,X,meta(_,_)) 'timestamp' t1(T3), t2(T1), less_datime(T3,T1))
         'where' (
+            lla_score_valid_threshold(ValidThresh),
+            Score1 > ValidThresh,
+            Score2 > ValidThresh,
             lla_score_diff_threshold(Thresh),
             abs(Score1 - Score2) < Thresh,
             aggr_score(Score1,Score2,Score)
@@ -77,11 +88,13 @@ r_lla_1 'rule:' lla(X,meta(L2, Score))
 
 %% Validity extension of a complex lla(+Activity,meta(+LastUpdate,+Confidence))
 %% event with a newly added atomic event, subject to rule window constraints
-r_lla_2 'rule:' lla(X,meta(L2, Score))
-    <-  (lla(X,meta(L1,Score1)) 'timestamp' t1(T1), t2(T2), less_datime(T1,T2))
+r_lla_2 'rule:' lla(U,X,meta(L2, Score))
+    <-  (lla(U,X,meta(L1,Score1)) 'timestamp' t1(T1), t2(T2), less_datime(T1,T2))
         'seq'
-        (lla(X,meta(L2,Score2)) 'timestamp' t1(T3), t2(T3))
+        (lla(U,X,meta(L2,Score2)) 'timestamp' t1(T3), t2(T3))
         'where' (
+            lla_score_valid_threshold(ValidThresh),
+            Score2 > ValidThresh,
             lla_max_rule_window(MaxTDiff),
             datime_minus_datime(T3,T2,TDiff),
             TDiff =< MaxTDiff,
@@ -95,3 +108,87 @@ r_lla_2 'rule:' lla(X,meta(L2, Score))
 */
 
 %% TODO - Implement domain specific rules based on the complex events
+hla_max_rule_window(2).
+hla_max_gap(2).
+
+r_hla_0 'rule:' hla(U,X,meta(L,ScoreHLA))
+    <-  (hla(U,X,meta(L1,Score1)) 'timestamp' t1(T1), t2(T2), writeln(format('caca maca at %2f', [L])))
+        'par'
+        (hla(U,X,meta(L2,Score2)) 'timestamp' t1(T3), t2(T4))
+        'where' (
+            hla_max_rule_window(MaxTDiff),
+            datime_minus_datime(T2,T4,TDiffEnd),
+            abs(TDiffEnd) =< MaxTDiff,
+            datime_minus_datime(T1,T3,TDiffStart),
+            abs(TDiffStart) =< MaxTDiff,
+            L1 \= L2,
+            L is max(L1,L2),
+            aggr_score(Score1,Score2,ScoreHLA)
+        ).
+
+r_hla_7 'rule:' hla(U,X,meta(L,ScoreHLA))
+    <-  (hla(U,X,meta(L1,Score1)) 'timestamp' t1(T1), t2(T2))
+        'seq'
+        (hla(U,X,meta(L2,Score2)) 'timestamp' t1(T3), t2(T4))
+        'where' (
+            datime_minus_datime(T2,T3,TGap),
+            hla_max_gap(MaxTGap),
+            TGap =< MaxTGap,
+            L1 \= L2,
+            L is max(L1,L2),
+            aggr_score(Score1,Score2,ScoreHLA)
+        ).
+
+r_hla_1 'rule:' hla(U,working,meta(L,ScoreHLA))
+    <-  (pos(U,work_area,meta(L1,ScorePos)) 'timestamp' t1(T1), t2(T2), less_datime(T1,T2))
+        'intersects'
+        (lla(U,sitting,meta(L2,ScoreLLA)) 'timestamp' t1(T3), t2(T4), less_datime(T3,T4))
+        'where' (
+            L is max(L1,L2),
+            aggr_score(ScorePos,ScoreLLA,ScoreHLA)
+        ).
+
+r_hla_2 'rule:' hla(U,relaxing,meta(L,ScoreHLA))
+    <-  (pos(U,entertainment,meta(L1,ScorePos)) 'timestamp' t1(T1), t2(T2), less_datime(T1,T2))
+        'intersects'
+        (lla(U,sitting,meta(L2,ScoreLLA)) 'timestamp' t1(T3), t2(T4), less_datime(T3,T4))
+        'where' (
+            L is max(L1,L2),
+            aggr_score(ScorePos,ScoreLLA,ScoreHLA)
+        ).
+
+r_hla_3 'rule:' hla(U,relaxing,meta(L,ScoreHLA))
+    <-  (pos(U,entertainment,meta(L1,ScorePos)) 'timestamp' t1(T1), t2(T2), less_datime(T1,T2))
+        'intersects'
+        (lla(U,lying,meta(L2,ScoreLLA)) 'timestamp' t1(T3), t2(T4), less_datime(T3,T4))
+        'where' (
+            L is max(L1,L2),
+            aggr_score(ScorePos,ScoreLLA,ScoreHLA)
+        ).
+
+r_hla_4 'rule:' hla(U,snacking,meta(L,ScoreHLA))
+    <-  (pos(U,snack_area,meta(L1,ScorePos)) 'timestamp' t1(T1), t2(T2), less_datime(T1,T2))
+        'intersects'
+        (lla(U,standing,meta(L2,ScoreLLA)) 'timestamp' t1(T3), t2(T4), less_datime(T3,T4))
+        'where' (
+            L is max(L1,L2),
+            aggr_score(ScorePos,ScoreLLA,ScoreHLA)
+        ).
+
+r_hla_5 'rule:' hla(U,snacking,meta(L,ScoreHLA))
+    <-  (pos(U,snack_area,meta(L1,ScorePos)) 'timestamp' t1(T1), t2(T2), less_datime(T1,T2))
+        'intersects'
+        (lla(U,sitting,meta(L2,ScoreLLA)) 'timestamp' t1(T3), t2(T4), less_datime(T3,T4))
+        'where' (
+            L is max(L1,L2),
+            aggr_score(ScorePos,ScoreLLA,ScoreHLA)
+        ).
+
+r_hla_6 'rule:' hla(U,dining,meta(L,ScoreHLA))
+    <-  (pos(U,dining_area,meta(L1,ScorePos)) 'timestamp' t1(T1), t2(T2), less_datime(T1,T2))
+        'intersects'
+        (lla(U,sitting,meta(L2,ScoreLLA)) 'timestamp' t1(T3), t2(T4), less_datime(T3,T4))
+        'where' (
+            L is max(L1,L2),
+            aggr_score(ScorePos,ScoreLLA,ScoreHLA)
+        ).

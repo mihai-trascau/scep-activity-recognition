@@ -18,6 +18,8 @@ class Generator(object):
 
 
 if __name__ == "__main__":
+    
+    '''
     ## set start of HLAs
     work_start = datetime.datetime.today()
     work_duration = 10  # 10 seocnd duration of working HLA
@@ -43,9 +45,69 @@ if __name__ == "__main__":
 
     ## create desired HLA sequence
     hla_list = [work_hla, undef_hla, discussing_hla]
+    '''
+
+    ## set start of UNDEFINED transition HLA at 10 seconds from "working" HLA
+    undef_1_start = datetime.datetime.today() 
+    undef_1_duration = 10
+    undef_1_hla = events.UndefinedHLA(person="mihai", start_time=undef_1_start, duration=undef_1_duration, lla_step=1, pos_step=1)
+    undef_1_hla.lla_error_rate = 0.1
+    undef_1_hla.pos_error_rate = 0.1
+    undef_1_hla.lla_false_detect_rate = 0.1
+    undef_1_hla.pos_false_detect_rate = 0.1
+
+    ## set start of HLAs
+    work_1_start = undef_1_start + datetime.timedelta(seconds = undef_1_duration + 2 * events.DEFAULT_NON_OVERLAP_DURATION)
+    # work_1_start = datetime.datetime.today()
+    work_1_duration = 120  # 10 seocnd duration of working HLA
+    work_1_hla = events.WorkingHLA(person="mihai", start_time=work_1_start, duration=work_1_duration, lla_step=1, pos_step=1)
+    work_1_hla.lla_error_rate = 0.1
+    work_1_hla.pos_error_rate = 0.1
+    work_1_hla.lla_false_detect_rate = 0.1
+    work_1_hla.pos_false_detect_rate = 0.1
+
+    ## set preceding HLA
+    work_1_hla.preceded_by = undef_1_hla
+
+    ## set start of UNDEFINED transition HLA at 10 seconds from "working" HLA
+    undef_2_start = work_1_start + datetime.timedelta(seconds = work_1_duration)
+    undef_2_duration = 20
+    undef_2_hla = events.UndefinedHLA(person="mihai", start_time=undef_2_start, duration=undef_2_duration, lla_step=1, pos_step=1)
+    undef_2_hla.lla_error_rate = 0.1
+    undef_2_hla.pos_error_rate = 0.1
+    undef_2_hla.lla_false_detect_rate = 0.1
+    undef_2_hla.pos_false_detect_rate = 0.1
+
+    ## set preceding HLA
+    undef_2_hla.preceded_by = work_1_hla
+
+    # set start of HLAs
+    work_2_start = undef_2_start + datetime.timedelta(seconds = undef_2_duration + 2 * events.DEFAULT_NON_OVERLAP_DURATION)
+    work_2_duration = 60  # 10 seocnd duration of working HLA
+    work_2_hla = events.WorkingHLA(person="mihai", start_time=work_2_start, duration=work_2_duration, lla_step=1, pos_step=1)
+    work_2_hla.lla_error_rate = 0.1
+    work_2_hla.pos_error_rate = 0.1
+    work_2_hla.lla_false_detect_rate = 0.1
+    work_2_hla.pos_false_detect_rate = 0.1
+
+    ## set preceding HLA
+    work_2_hla.preceded_by = undef_2_hla
+
+    ## set start of HLAs
+    dining_hla_start = work_2_start + datetime.timedelta(seconds = work_2_duration + 2 * events.DEFAULT_NON_OVERLAP_DURATION)
+    dining_hla_duration = 60  # 10 seocnd duration of working HLA
+    dining_hla = events.DiningHLA(person="mihai", start_time=dining_hla_start, duration=dining_hla_duration, lla_step=1, pos_step=1)
+    dining_hla.lla_error_rate = 0.1
+    dining_hla.pos_error_rate = 0.1
+    dining_hla.lla_false_detect_rate = 0.1
+    dining_hla.pos_false_detect_rate = 0.1
+
+    dining_hla.preceded_by = work_2_hla
+
+    hla_list = [undef_1_hla, work_1_hla, undef_2_hla, work_2_hla, dining_hla]
 
     ## generate HLA events and print them to file
-    with open("generator_out.stream", "w") as outfile:
+    with open("../single_hla_120s_01er_015fd.stream", "w") as outfile:
         gen = Generator(hla_list, outfile)
         gen.generate()
 
