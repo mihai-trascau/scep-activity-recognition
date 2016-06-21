@@ -7,9 +7,9 @@ class Generator(object):
         self.hla_list = hla_list
         self.output_stream = output_stream
 
-    def generate(self):
+    def generate(self, with_sleep = False):
         for hla in hla_list:
-            event_list = hla.generate()
+            event_list = hla.generate(with_sleep=with_sleep)
             print >> self.output_stream, "%% ======== HLA: " + hla.type + " ======== "
             for event in event_list:
                 print >> self.output_stream, event.to_etalis()
@@ -107,8 +107,9 @@ if __name__ == "__main__":
     hla_list = [undef_1_hla, work_1_hla, undef_2_hla, work_2_hla, dining_hla]
 
     ## generate HLA events and print them to file
-    with open("../single_hla_120s_01er_015fd.stream", "w") as outfile:
+    with open("../single_hla_120s_01er_015fd_with_sleep.stream", "w") as outfile:
+    #with open("../single_hla_120s_01er_015fd.stream", "w") as outfile:
         gen = Generator(hla_list, outfile)
-        gen.generate()
+        gen.generate(with_sleep=True)
 
         print "Done. Event stream generated!"
