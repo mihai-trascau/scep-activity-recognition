@@ -1,0 +1,841 @@
+%% ======== HLA: undefined ======== 
+event(pos(mihai, work_area, meta(0, 0.115034990751))).
+event(lla(mihai, walking, meta(1, 0.80355818179))).
+sleep(1).
+event(pos(mihai, work_area, meta(2, 0.175035609469))).
+event(lla(mihai, walking, meta(3, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(4, 0.253498981754))).
+event(lla(mihai, walking, meta(5, 0.986743558754))).
+sleep(1).
+event(pos(mihai, work_area, meta(6, 0.349445446931))).
+event(lla(mihai, walking, meta(7, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(8, 0.458496381152))).
+event(lla(mihai, walking, meta(9, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(10, 0.572592687043))).
+event(lla(mihai, walking, meta(11, 0.948711161418))).
+sleep(1).
+event(pos(mihai, work_area, meta(12, 0.680626792479))).
+event(lla(mihai, walking, meta(13, 0.696667108627))).
+sleep(1).
+event(pos(mihai, work_area, meta(14, 0.770061912443))).
+event(lla(mihai, walking, meta(15, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(16, 0.829269333055))).
+event(lla(mihai, walking, meta(17, 0.866176376226))).
+sleep(1).
+event(pos(mihai, work_area, meta(18, 0.85))).
+event(lla(mihai, walking, meta(19, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(20, 0.744458840846))).
+event(lla(mihai, walking, meta(21, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(22, 0.973991045073))).
+event(lla(mihai, walking, meta(23, 0.683766404491))).
+
+
+%% ======== HLA: working ======== 
+event(pos(mihai, work_area, meta(24, 0.93590497487))).
+event(lla(mihai, sitting, meta(25, 0.797429658))).
+sleep(1).
+event(pos(mihai, work_area, meta(26, 0.718989554364))).
+event(lla(mihai, sitting, meta(27, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(28, 1.0))).
+event(lla(mihai, sitting, meta(29, 0.79376886524))).
+sleep(1).
+event(pos(mihai, work_area, meta(30, 0.816243337947))).
+sleep(1).
+event(pos(mihai, work_area, meta(31, 0.971372863166))).
+event(lla(mihai, sitting, meta(32, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(33, 1.0))).
+event(lla(mihai, sitting, meta(34, 0.725023619269))).
+sleep(1).
+event(lla(mihai, sitting, meta(35, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(36, 0.65))).
+event(lla(mihai, sitting, meta(37, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(38, 0.835479498217))).
+event(lla(mihai, sitting, meta(39, 1.0))).
+sleep(1).
+event(lla(mihai, sitting, meta(40, 0.751533284073))).
+sleep(1).
+event(pos(mihai, work_area, meta(41, 0.98070394644))).
+event(lla(mihai, sitting, meta(42, 0.767949876729))).
+sleep(1).
+event(pos(mihai, work_area, meta(43, 0.847826506988))).
+event(lla(mihai, sitting, meta(44, 0.956249591512))).
+sleep(1).
+event(pos(mihai, work_area, meta(45, 0.876300420343))).
+event(lla(mihai, sitting, meta(46, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(47, 0.846238390854))).
+event(lla(mihai, sitting, meta(48, 0.695352980186))).
+sleep(1).
+event(pos(mihai, work_area, meta(49, 0.926686043973))).
+event(lla(mihai, sitting, meta(50, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(51, 0.65))).
+event(lla(mihai, sitting, meta(52, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(53, 0.922938568578))).
+event(lla(mihai, sitting, meta(54, 0.803464651517))).
+sleep(1).
+event(pos(mihai, work_area, meta(55, 0.850141383452))).
+sleep(1).
+event(pos(mihai, work_area, meta(56, 1.0))).
+event(lla(mihai, sitting, meta(57, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(58, 0.829971897956))).
+event(lla(mihai, sitting, meta(59, 0.67180296901))).
+sleep(1).
+event(pos(mihai, work_area, meta(60, 0.849646075746))).
+event(lla(mihai, sitting, meta(61, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(62, 1.0))).
+event(lla(mihai, sitting, meta(63, 0.829438015898))).
+sleep(1).
+event(pos(mihai, work_area, meta(64, 1.0))).
+event(lla(mihai, sitting, meta(65, 0.849665526382))).
+sleep(1).
+event(pos(mihai, work_area, meta(66, 1.0))).
+event(lla(mihai, sitting, meta(67, 0.749426623821))).
+sleep(1).
+event(pos(mihai, work_area, meta(68, 0.848215919365))).
+event(lla(mihai, sitting, meta(69, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(70, 0.841068267236))).
+event(lla(mihai, sitting, meta(71, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(72, 0.904690171007))).
+event(lla(mihai, sitting, meta(73, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(74, 0.741790966313))).
+event(lla(mihai, sitting, meta(75, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(76, 0.811864461151))).
+sleep(1).
+event(pos(mihai, work_area, meta(77, 0.909486253551))).
+event(lla(mihai, sitting, meta(78, 0.66335068616))).
+sleep(1).
+event(pos(mihai, work_area, meta(79, 0.812647607874))).
+event(lla(mihai, sitting, meta(80, 0.746618668131))).
+sleep(1).
+event(pos(mihai, work_area, meta(81, 0.924173614249))).
+event(lla(mihai, sitting, meta(82, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(83, 0.65))).
+event(lla(mihai, sitting, meta(84, 0.696303184037))).
+sleep(1).
+event(pos(mihai, work_area, meta(85, 1.0))).
+sleep(1).
+event(lla(mihai, sitting, meta(86, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(87, 0.862522787206))).
+event(lla(mihai, sitting, meta(88, 0.972353816558))).
+sleep(1).
+event(pos(mihai, work_area, meta(89, 1.0))).
+event(lla(mihai, sitting, meta(90, 0.654641079552))).
+sleep(1).
+event(pos(mihai, work_area, meta(91, 0.82824037786))).
+event(lla(mihai, sitting, meta(92, 0.652105999735))).
+sleep(1).
+event(pos(mihai, work_area, meta(93, 0.988192515431))).
+event(lla(mihai, sitting, meta(94, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(95, 1.0))).
+event(lla(mihai, sitting, meta(96, 0.947540564796))).
+sleep(1).
+event(pos(mihai, work_area, meta(97, 0.767845047163))).
+event(lla(mihai, sitting, meta(98, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(99, 0.651317064401))).
+event(lla(mihai, sitting, meta(100, 0.733644619302))).
+sleep(1).
+event(pos(mihai, work_area, meta(101, 0.899386004135))).
+event(lla(mihai, sitting, meta(102, 0.650487960588))).
+sleep(1).
+event(pos(mihai, work_area, meta(103, 0.970690653028))).
+event(lla(mihai, sitting, meta(104, 0.888606909928))).
+sleep(1).
+event(pos(mihai, work_area, meta(105, 0.994530675084))).
+event(lla(mihai, sitting, meta(106, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(107, 0.709392860458))).
+event(lla(mihai, sitting, meta(108, 0.931673733425))).
+sleep(1).
+event(pos(mihai, work_area, meta(109, 0.662977420135))).
+event(lla(mihai, sitting, meta(110, 0.788121017685))).
+sleep(1).
+event(pos(mihai, work_area, meta(111, 0.758044679964))).
+event(lla(mihai, sitting, meta(112, 0.995578537727))).
+sleep(1).
+event(pos(mihai, work_area, meta(113, 1.0))).
+event(lla(mihai, sitting, meta(114, 0.985615794298))).
+sleep(1).
+event(pos(mihai, work_area, meta(115, 0.829346974892))).
+event(lla(mihai, sitting, meta(116, 0.816927469349))).
+sleep(1).
+event(pos(mihai, work_area, meta(117, 0.85275168759))).
+event(lla(mihai, sitting, meta(118, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(119, 0.918668781189))).
+event(lla(mihai, sitting, meta(120, 1.0))).
+sleep(1).
+event(lla(mihai, sitting, meta(121, 0.666257541681))).
+sleep(1).
+event(pos(mihai, work_area, meta(122, 0.8404091938))).
+event(lla(mihai, sitting, meta(123, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(124, 1.0))).
+event(lla(mihai, sitting, meta(125, 0.724492594595))).
+sleep(1).
+event(pos(mihai, work_area, meta(126, 0.782630456252))).
+event(lla(mihai, sitting, meta(127, 0.763630274013))).
+sleep(1).
+event(pos(mihai, work_area, meta(128, 0.981506018085))).
+event(lla(mihai, sitting, meta(129, 0.988672029474))).
+sleep(1).
+event(lla(mihai, sitting, meta(130, 0.782093534282))).
+sleep(1).
+event(pos(mihai, work_area, meta(131, 0.873704920992))).
+event(lla(mihai, sitting, meta(132, 0.782332075221))).
+sleep(1).
+event(pos(mihai, work_area, meta(133, 0.65))).
+event(lla(mihai, sitting, meta(134, 0.895901324156))).
+sleep(1).
+event(pos(mihai, work_area, meta(135, 0.827970739255))).
+event(lla(mihai, sitting, meta(136, 0.99769585772))).
+sleep(1).
+event(pos(mihai, work_area, meta(137, 1.0))).
+event(lla(mihai, sitting, meta(138, 0.91177811418))).
+sleep(1).
+event(pos(mihai, work_area, meta(139, 0.98128565447))).
+event(lla(mihai, sitting, meta(140, 0.650767342142))).
+sleep(1).
+event(pos(mihai, work_area, meta(141, 0.699324393923))).
+event(lla(mihai, sitting, meta(142, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(143, 1.0))).
+event(lla(mihai, sitting, meta(144, 0.876149963367))).
+sleep(1).
+event(pos(mihai, work_area, meta(145, 0.961088516556))).
+event(lla(mihai, sitting, meta(146, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(147, 1.0))).
+event(lla(mihai, sitting, meta(148, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(149, 0.712589134988))).
+event(lla(mihai, sitting, meta(150, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(151, 0.856524226218))).
+sleep(1).
+event(pos(mihai, work_area, meta(152, 0.867164330808))).
+event(lla(mihai, sitting, meta(153, 0.902518729249))).
+sleep(1).
+event(pos(mihai, work_area, meta(154, 1.0))).
+event(lla(mihai, sitting, meta(155, 0.725563151884))).
+sleep(1).
+event(pos(mihai, work_area, meta(156, 0.821850878966))).
+event(lla(mihai, sitting, meta(157, 0.897740896838))).
+sleep(1).
+event(pos(mihai, work_area, meta(158, 1.0))).
+event(lla(mihai, sitting, meta(159, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(160, 0.942836572864))).
+event(lla(mihai, sitting, meta(161, 0.871459731632))).
+sleep(1).
+event(pos(mihai, work_area, meta(162, 0.97488551872))).
+event(lla(mihai, sitting, meta(163, 0.748819913151))).
+sleep(1).
+event(pos(mihai, work_area, meta(164, 0.713137921502))).
+event(lla(mihai, sitting, meta(165, 0.903776140954))).
+sleep(1).
+event(pos(mihai, work_area, meta(166, 0.88571023619))).
+event(lla(mihai, sitting, meta(167, 0.924363760686))).
+sleep(1).
+event(pos(mihai, work_area, meta(168, 0.802402679373))).
+event(lla(mihai, standing, meta(169, 0.714064758883))).
+sleep(1).
+event(pos(mihai, work_area, meta(170, 1.0))).
+event(lla(mihai, sitting, meta(171, 0.921583691433))).
+sleep(1).
+event(pos(mihai, work_area, meta(172, 0.65))).
+event(lla(mihai, sitting, meta(173, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(174, 0.815328883583))).
+sleep(1).
+event(pos(mihai, work_area, meta(175, 0.942285732802))).
+sleep(1).
+event(pos(mihai, work_area, meta(176, 0.673393149787))).
+event(lla(mihai, sitting, meta(177, 0.90266260642))).
+sleep(1).
+event(pos(mihai, work_area, meta(178, 0.839185330896))).
+event(lla(mihai, sitting, meta(179, 0.913036526841))).
+sleep(1).
+event(pos(mihai, work_area, meta(180, 0.973073028635))).
+event(lla(mihai, sitting, meta(181, 0.965800641002))).
+sleep(1).
+event(pos(mihai, work_area, meta(182, 0.814700557847))).
+event(lla(mihai, sitting, meta(183, 0.825309463239))).
+sleep(1).
+event(pos(mihai, work_area, meta(184, 0.944102877107))).
+event(lla(mihai, sitting, meta(185, 0.758110060752))).
+sleep(1).
+event(pos(mihai, work_area, meta(186, 1.0))).
+event(lla(mihai, sitting, meta(187, 0.916863971527))).
+sleep(1).
+event(pos(mihai, work_area, meta(188, 0.84944196285))).
+event(lla(mihai, sitting, meta(189, 0.973868532838))).
+sleep(1).
+event(pos(mihai, work_area, meta(190, 0.65))).
+event(lla(mihai, sitting, meta(191, 0.985007249349))).
+sleep(1).
+event(pos(mihai, work_area, meta(192, 1.0))).
+event(lla(mihai, sitting, meta(193, 0.873071748698))).
+sleep(1).
+event(pos(mihai, work_area, meta(194, 0.827867125556))).
+event(lla(mihai, sitting, meta(195, 0.936255534375))).
+sleep(1).
+event(lla(mihai, sitting, meta(196, 0.849582425002))).
+sleep(1).
+event(pos(mihai, work_area, meta(197, 0.793128250951))).
+event(lla(mihai, sitting, meta(198, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(199, 0.984904063152))).
+event(lla(mihai, sitting, meta(200, 0.668675152976))).
+sleep(1).
+event(pos(mihai, work_area, meta(201, 1.0))).
+event(lla(mihai, sitting, meta(202, 0.995377435719))).
+sleep(1).
+event(pos(mihai, work_area, meta(203, 1.0))).
+event(lla(mihai, sitting, meta(204, 0.805841646531))).
+sleep(1).
+event(pos(mihai, work_area, meta(205, 1.0))).
+event(lla(mihai, sitting, meta(206, 0.861496758168))).
+sleep(1).
+event(lla(mihai, sitting, meta(207, 0.930945294817))).
+sleep(1).
+event(pos(mihai, work_area, meta(208, 0.65))).
+event(lla(mihai, sitting, meta(209, 0.833569468879))).
+sleep(1).
+event(pos(mihai, work_area, meta(210, 0.854187557253))).
+event(lla(mihai, sitting, meta(211, 0.952055597893))).
+sleep(1).
+event(pos(mihai, work_area, meta(212, 0.887044728278))).
+event(lla(mihai, sitting, meta(213, 0.862788430536))).
+sleep(1).
+event(pos(mihai, work_area, meta(214, 0.716608995685))).
+event(lla(mihai, sitting, meta(215, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(216, 0.851831852317))).
+event(lla(mihai, sitting, meta(217, 0.872844456017))).
+sleep(1).
+event(pos(mihai, work_area, meta(218, 0.735218326431))).
+event(lla(mihai, sitting, meta(219, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(220, 1.0))).
+event(lla(mihai, sitting, meta(221, 0.844075553873))).
+sleep(1).
+event(pos(mihai, work_area, meta(222, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(223, 0.681117996516))).
+event(lla(mihai, sitting, meta(224, 0.723398419936))).
+sleep(1).
+event(pos(mihai, work_area, meta(225, 0.819975260246))).
+event(lla(mihai, sitting, meta(226, 0.924149426445))).
+sleep(1).
+event(pos(mihai, work_area, meta(227, 0.855758522315))).
+sleep(1).
+event(pos(mihai, work_area, meta(228, 0.872574521765))).
+event(lla(mihai, sitting, meta(229, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(230, 1.0))).
+event(lla(mihai, sitting, meta(231, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(232, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(233, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(234, 0.953243295576))).
+event(lla(mihai, sitting, meta(235, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(236, 0.65))).
+event(lla(mihai, sitting, meta(237, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(238, 0.776956190953))).
+event(lla(mihai, sitting, meta(239, 0.973463730118))).
+sleep(1).
+event(lla(mihai, sitting, meta(240, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(241, 0.844893715111))).
+event(lla(mihai, sitting, meta(242, 0.663694281261))).
+sleep(1).
+event(pos(mihai, work_area, meta(243, 0.803318809489))).
+event(lla(mihai, sitting, meta(244, 0.988854937078))).
+
+
+%% ======== HLA: undefined ======== 
+event(pos(mihai, work_area, meta(245, 0.704289015835))).
+event(lla(mihai, walking, meta(246, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(247, 0.704838968716))).
+event(lla(mihai, walking, meta(248, 0.731369054691))).
+sleep(1).
+event(pos(mihai, work_area, meta(249, 0.85))).
+event(lla(mihai, walking, meta(250, 1.0))).
+event(pos(mihai, work_area, meta(251, 0.115034990751))).
+event(lla(mihai, walking, meta(252, 0.963858958547))).
+sleep(1).
+event(pos(mihai, work_area, meta(253, 0.845303879382))).
+event(lla(mihai, walking, meta(254, 0.65))).
+event(pos(mihai, work_area, meta(255, 0.141206378714))).
+event(lla(mihai, walking, meta(256, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(257, 0.831370617052))).
+event(lla(mihai, walking, meta(258, 0.65))).
+event(pos(mihai, work_area, meta(259, 0.171421993759))).
+event(lla(mihai, walking, meta(260, 0.827856109815))).
+sleep(1).
+event(pos(mihai, work_area, meta(261, 0.808657005425))).
+event(lla(mihai, walking, meta(262, 0.65))).
+event(pos(mihai, work_area, meta(263, 0.205810079839))).
+event(lla(mihai, walking, meta(264, 0.815793713624))).
+sleep(1).
+event(pos(mihai, work_area, meta(265, 0.777896662032))).
+event(lla(mihai, walking, meta(266, 0.65))).
+event(pos(mihai, work_area, meta(267, 0.244373783656))).
+event(lla(mihai, walking, meta(268, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(269, 0.740060688528))).
+event(lla(mihai, walking, meta(270, 0.776538816451))).
+event(pos(mihai, work_area, meta(271, 0.286966009029))).
+event(lla(mihai, walking, meta(272, 0.714088111186))).
+sleep(1).
+event(pos(mihai, work_area, meta(273, 0.696306798815))).
+event(lla(mihai, walking, meta(274, 0.859335569))).
+event(pos(mihai, work_area, meta(275, 0.333268429829))).
+event(lla(mihai, walking, meta(276, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(277, 0.64792063075))).
+event(lla(mihai, walking, meta(278, 0.979557047081))).
+event(pos(mihai, work_area, meta(279, 0.38277693944))).
+event(lla(mihai, walking, meta(280, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(281, 0.596253380844))).
+event(lla(mihai, walking, meta(282, 0.849834321982))).
+event(pos(mihai, work_area, meta(283, 0.434795688298))).
+event(lla(mihai, walking, meta(284, 0.754161819717))).
+sleep(1).
+event(pos(mihai, work_area, meta(285, 0.542659953371))).
+event(lla(mihai, walking, meta(286, 0.898434775254))).
+event(pos(mihai, work_area, meta(287, 0.488441509292))).
+event(lla(mihai, walking, meta(288, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(289, 0.488441509292))).
+event(lla(mihai, walking, meta(290, 0.804392157996))).
+event(pos(mihai, work_area, meta(291, 0.542659953371))).
+event(lla(mihai, walking, meta(292, 0.997004636312))).
+sleep(1).
+event(pos(mihai, work_area, meta(293, 0.434795688298))).
+event(lla(mihai, walking, meta(294, 0.677683932352))).
+event(pos(mihai, work_area, meta(295, 0.596253380844))).
+event(lla(mihai, walking, meta(296, 0.898171789092))).
+sleep(1).
+event(pos(mihai, work_area, meta(297, 0.38277693944))).
+event(lla(mihai, walking, meta(298, 0.65))).
+event(pos(mihai, work_area, meta(299, 0.64792063075))).
+event(lla(mihai, walking, meta(300, 0.670131851682))).
+sleep(1).
+event(pos(mihai, work_area, meta(301, 0.333268429829))).
+event(lla(mihai, walking, meta(302, 0.673899252248))).
+event(pos(mihai, work_area, meta(303, 0.696306798815))).
+event(lla(mihai, walking, meta(304, 0.683743979369))).
+sleep(1).
+event(pos(mihai, work_area, meta(305, 0.286966009029))).
+event(lla(mihai, walking, meta(306, 0.869725648613))).
+event(pos(mihai, work_area, meta(307, 0.740060688528))).
+event(lla(mihai, walking, meta(308, 0.805692884056))).
+sleep(1).
+event(pos(mihai, work_area, meta(309, 0.244373783656))).
+event(lla(mihai, walking, meta(310, 0.65))).
+event(pos(mihai, work_area, meta(311, 0.777896662032))).
+event(lla(mihai, walking, meta(312, 0.845973819409))).
+sleep(1).
+event(pos(mihai, work_area, meta(313, 0.205810079839))).
+event(lla(mihai, walking, meta(314, 0.906564061789))).
+event(pos(mihai, work_area, meta(315, 0.808657005425))).
+event(lla(mihai, walking, meta(316, 0.840787461529))).
+sleep(1).
+event(pos(mihai, work_area, meta(317, 0.171421993759))).
+event(lla(mihai, walking, meta(318, 0.896746485311))).
+event(pos(mihai, work_area, meta(319, 0.831370617052))).
+event(lla(mihai, walking, meta(320, 0.834105696284))).
+sleep(1).
+event(pos(mihai, work_area, meta(321, 0.141206378714))).
+event(lla(mihai, walking, meta(322, 0.989603904598))).
+event(pos(mihai, work_area, meta(323, 0.845303879382))).
+event(lla(mihai, walking, meta(324, 0.762137051912))).
+sleep(1).
+event(pos(mihai, work_area, meta(325, 0.115034990751))).
+event(lla(mihai, walking, meta(326, 0.906070505055))).
+event(pos(mihai, work_area, meta(327, 0.85))).
+event(lla(mihai, walking, meta(328, 0.702698166509))).
+sleep(1).
+event(pos(mihai, work_area, meta(329, 0.71850008689))).
+event(lla(mihai, walking, meta(330, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(331, 0.998523832764))).
+event(lla(mihai, walking, meta(332, 0.818981880802))).
+
+
+%% ======== HLA: working ======== 
+event(pos(mihai, work_area, meta(333, 0.915883834554))).
+event(lla(mihai, sitting, meta(334, 0.898225899149))).
+sleep(1).
+event(pos(mihai, work_area, meta(335, 0.840352360854))).
+event(lla(mihai, sitting, meta(336, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(337, 0.898107029075))).
+event(lla(mihai, sitting, meta(338, 0.885490441545))).
+sleep(1).
+event(pos(mihai, work_area, meta(339, 0.958159522782))).
+event(lla(mihai, sitting, meta(340, 0.683686162288))).
+sleep(1).
+event(pos(mihai, work_area, meta(341, 0.656604696394))).
+event(lla(mihai, sitting, meta(342, 0.762147298864))).
+sleep(1).
+event(pos(mihai, work_area, meta(343, 0.944819436368))).
+event(lla(mihai, sitting, meta(344, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(345, 0.866774297608))).
+event(lla(mihai, sitting, meta(346, 0.817385873796))).
+sleep(1).
+event(pos(mihai, work_area, meta(347, 0.960436318683))).
+event(lla(mihai, sitting, meta(348, 0.94327657075))).
+sleep(1).
+event(pos(mihai, work_area, meta(349, 1.0))).
+event(lla(mihai, sitting, meta(350, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(351, 0.919125865547))).
+event(lla(mihai, sitting, meta(352, 0.770456569871))).
+sleep(1).
+event(pos(mihai, work_area, meta(353, 0.749449735338))).
+sleep(1).
+event(lla(mihai, sitting, meta(354, 0.99013514673))).
+sleep(1).
+event(pos(mihai, work_area, meta(355, 0.774016732458))).
+event(lla(mihai, sitting, meta(356, 0.80702547887))).
+sleep(1).
+event(pos(mihai, work_area, meta(357, 0.864660733453))).
+event(lla(mihai, standing, meta(358, 0.916078535104))).
+sleep(1).
+event(pos(mihai, work_area, meta(359, 0.753382996484))).
+event(lla(mihai, sitting, meta(360, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(361, 1.0))).
+event(lla(mihai, sitting, meta(362, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(363, 0.65))).
+event(lla(mihai, sitting, meta(364, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(365, 0.918539935946))).
+event(lla(mihai, sitting, meta(366, 0.871530135878))).
+sleep(1).
+event(lla(mihai, sitting, meta(367, 0.833141443699))).
+sleep(1).
+event(pos(mihai, work_area, meta(368, 0.953165545455))).
+event(lla(mihai, sitting, meta(369, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(370, 0.91104706787))).
+event(lla(mihai, sitting, meta(371, 0.905612653832))).
+sleep(1).
+event(pos(mihai, work_area, meta(372, 0.67771616437))).
+event(lla(mihai, sitting, meta(373, 0.72508388215))).
+sleep(1).
+event(pos(mihai, work_area, meta(374, 0.800175734847))).
+sleep(1).
+event(lla(mihai, sitting, meta(375, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(376, 0.65))).
+event(lla(mihai, sitting, meta(377, 0.816134173826))).
+sleep(1).
+event(pos(mihai, work_area, meta(378, 0.869965038757))).
+event(lla(mihai, sitting, meta(379, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(380, 0.746456126586))).
+event(lla(mihai, sitting, meta(381, 0.976244608709))).
+sleep(1).
+event(pos(mihai, work_area, meta(382, 1.0))).
+event(lla(mihai, sitting, meta(383, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(384, 0.65))).
+event(lla(mihai, sitting, meta(385, 0.873073988134))).
+sleep(1).
+event(pos(mihai, work_area, meta(386, 0.718563592436))).
+event(lla(mihai, sitting, meta(387, 0.942514113458))).
+sleep(1).
+event(pos(mihai, work_area, meta(388, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(389, 0.85346311102))).
+event(lla(mihai, sitting, meta(390, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(391, 0.65))).
+event(lla(mihai, sitting, meta(392, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(393, 0.741181291327))).
+event(lla(mihai, sitting, meta(394, 0.898749011955))).
+sleep(1).
+event(pos(mihai, work_area, meta(395, 1.0))).
+event(lla(mihai, sitting, meta(396, 0.793426344369))).
+sleep(1).
+event(pos(mihai, work_area, meta(397, 1.0))).
+event(lla(mihai, sitting, meta(398, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(399, 0.65))).
+event(lla(mihai, sitting, meta(400, 0.781143124038))).
+sleep(1).
+event(pos(mihai, work_area, meta(401, 0.65))).
+event(lla(mihai, sitting, meta(402, 0.872980837054))).
+sleep(1).
+event(pos(mihai, work_area, meta(403, 1.0))).
+event(lla(mihai, sitting, meta(404, 0.822326209467))).
+sleep(1).
+event(pos(mihai, work_area, meta(405, 0.924319566419))).
+event(lla(mihai, sitting, meta(406, 0.826168563015))).
+sleep(1).
+event(pos(mihai, work_area, meta(407, 0.979080833801))).
+sleep(1).
+event(pos(mihai, work_area, meta(408, 0.730817949373))).
+event(lla(mihai, sitting, meta(409, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(410, 0.973546278686))).
+event(lla(mihai, sitting, meta(411, 0.66948005473))).
+sleep(1).
+event(pos(mihai, work_area, meta(412, 0.80003011984))).
+event(lla(mihai, sitting, meta(413, 0.703878873579))).
+sleep(1).
+event(pos(mihai, work_area, meta(414, 0.973182404402))).
+event(lla(mihai, sitting, meta(415, 0.743172872382))).
+sleep(1).
+event(pos(mihai, work_area, meta(416, 0.970382961656))).
+event(lla(mihai, sitting, meta(417, 0.917527450307))).
+sleep(1).
+event(pos(mihai, work_area, meta(418, 0.949540937597))).
+event(lla(mihai, sitting, meta(419, 0.916351765168))).
+sleep(1).
+event(pos(mihai, work_area, meta(420, 0.65))).
+event(lla(mihai, sitting, meta(421, 0.736420357006))).
+sleep(1).
+event(pos(mihai, work_area, meta(422, 0.799914901795))).
+event(lla(mihai, sitting, meta(423, 0.690548976266))).
+sleep(1).
+event(pos(mihai, work_area, meta(424, 0.65))).
+sleep(1).
+event(pos(mihai, work_area, meta(425, 0.76253685772))).
+event(lla(mihai, sitting, meta(426, 0.870017530145))).
+sleep(1).
+event(pos(mihai, work_area, meta(427, 1.0))).
+event(lla(mihai, sitting, meta(428, 0.807817790123))).
+sleep(1).
+event(lla(mihai, sitting, meta(429, 0.922941510275))).
+sleep(1).
+event(pos(mihai, work_area, meta(430, 1.0))).
+event(lla(mihai, sitting, meta(431, 0.944600058352))).
+sleep(1).
+event(pos(mihai, work_area, meta(432, 0.65))).
+event(lla(mihai, sitting, meta(433, 0.999393066883))).
+sleep(1).
+event(pos(mihai, work_area, meta(434, 0.686641037635))).
+event(lla(mihai, sitting, meta(435, 0.823411674925))).
+sleep(1).
+event(pos(mihai, work_area, meta(436, 0.930885624263))).
+event(lla(mihai, sitting, meta(437, 0.920954598097))).
+sleep(1).
+event(pos(mihai, work_area, meta(438, 0.898820107714))).
+event(lla(mihai, sitting, meta(439, 1.0))).
+sleep(1).
+event(pos(mihai, work_area, meta(440, 1.0))).
+event(lla(mihai, sitting, meta(441, 0.738885087917))).
+sleep(1).
+event(pos(mihai, work_area, meta(442, 0.838847525831))).
+event(lla(mihai, sitting, meta(443, 0.65))).
+
+
+%% ======== HLA: dining ======== 
+event(pos(mihai, dining_area, meta(444, 0.717312364533))).
+event(lla(mihai, sitting, meta(445, 1.0))).
+sleep(1).
+event(pos(mihai, dining_area, meta(446, 0.934781080446))).
+sleep(1).
+event(lla(mihai, sitting, meta(447, 0.981551699219))).
+sleep(1).
+event(pos(mihai, dining_area, meta(448, 0.67782448283))).
+event(lla(mihai, sitting, meta(449, 0.671368042489))).
+sleep(1).
+event(pos(mihai, dining_area, meta(450, 0.743418192829))).
+event(lla(mihai, sitting, meta(451, 1.0))).
+sleep(1).
+event(pos(mihai, dining_area, meta(452, 0.775263360138))).
+event(lla(mihai, sitting, meta(453, 1.0))).
+sleep(1).
+event(pos(mihai, dining_area, meta(454, 0.65))).
+event(lla(mihai, sitting, meta(455, 0.811238964169))).
+sleep(1).
+event(pos(mihai, dining_area, meta(456, 0.765247595586))).
+event(lla(mihai, sitting, meta(457, 1.0))).
+sleep(1).
+event(pos(mihai, dining_area, meta(458, 0.65))).
+event(lla(mihai, sitting, meta(459, 0.65))).
+sleep(1).
+event(pos(mihai, dining_area, meta(460, 0.65))).
+event(lla(mihai, sitting, meta(461, 0.928748339978))).
+sleep(1).
+event(pos(mihai, dining_area, meta(462, 0.65))).
+event(lla(mihai, sitting, meta(463, 1.0))).
+sleep(1).
+event(pos(mihai, dining_area, meta(464, 0.810545503432))).
+event(lla(mihai, sitting, meta(465, 0.902033796738))).
+sleep(1).
+event(pos(mihai, dining_area, meta(466, 1.0))).
+event(lla(mihai, sitting, meta(467, 0.862818144021))).
+sleep(1).
+event(pos(mihai, dining_area, meta(468, 0.695449635724))).
+event(lla(mihai, sitting, meta(469, 0.65))).
+sleep(1).
+event(pos(mihai, dining_area, meta(470, 0.878489187846))).
+sleep(1).
+event(pos(mihai, dining_area, meta(471, 1.0))).
+event(lla(mihai, sitting, meta(472, 0.74707396211))).
+sleep(1).
+event(pos(mihai, dining_area, meta(473, 0.697937106033))).
+event(lla(mihai, sitting, meta(474, 0.744981722708))).
+sleep(1).
+event(pos(mihai, dining_area, meta(475, 1.0))).
+event(lla(mihai, sitting, meta(476, 0.806850615301))).
+sleep(1).
+event(pos(mihai, dining_area, meta(477, 1.0))).
+event(lla(mihai, sitting, meta(478, 0.65))).
+sleep(1).
+event(pos(mihai, dining_area, meta(479, 0.863207377223))).
+sleep(1).
+event(pos(mihai, dining_area, meta(480, 0.79517853076))).
+event(lla(mihai, sitting, meta(481, 0.742448534236))).
+sleep(1).
+event(pos(mihai, dining_area, meta(482, 0.740359124544))).
+event(lla(mihai, sitting, meta(483, 1.0))).
+sleep(1).
+event(pos(mihai, dining_area, meta(484, 1.0))).
+event(lla(mihai, sitting, meta(485, 0.814905487708))).
+sleep(1).
+event(pos(mihai, dining_area, meta(486, 0.977323065281))).
+event(lla(mihai, sitting, meta(487, 0.82535482787))).
+sleep(1).
+event(pos(mihai, dining_area, meta(488, 1.0))).
+event(lla(mihai, sitting, meta(489, 0.805787910525))).
+sleep(1).
+event(pos(mihai, dining_area, meta(490, 0.983352997828))).
+event(lla(mihai, sitting, meta(491, 0.868298662174))).
+sleep(1).
+event(pos(mihai, dining_area, meta(492, 0.97876556804))).
+sleep(1).
+event(pos(mihai, dining_area, meta(493, 0.65))).
+event(lla(mihai, sitting, meta(494, 1.0))).
+sleep(1).
+event(pos(mihai, dining_area, meta(495, 0.829593312867))).
+event(lla(mihai, sitting, meta(496, 0.741726664297))).
+sleep(1).
+event(pos(mihai, dining_area, meta(497, 0.99298188245))).
+sleep(1).
+event(pos(mihai, dining_area, meta(498, 0.857392317106))).
+event(lla(mihai, sitting, meta(499, 1.0))).
+sleep(1).
+event(pos(mihai, dining_area, meta(500, 0.904543393163))).
+event(lla(mihai, sitting, meta(501, 0.766108371827))).
+sleep(1).
+event(pos(mihai, dining_area, meta(502, 1.0))).
+event(lla(mihai, sitting, meta(503, 0.942880871384))).
+sleep(1).
+event(pos(mihai, dining_area, meta(504, 1.0))).
+event(lla(mihai, sitting, meta(505, 0.65))).
+sleep(1).
+event(pos(mihai, dining_area, meta(506, 1.0))).
+event(lla(mihai, sitting, meta(507, 0.928730467798))).
+sleep(1).
+event(pos(mihai, dining_area, meta(508, 1.0))).
+event(lla(mihai, sitting, meta(509, 0.920703773229))).
+sleep(1).
+event(pos(mihai, dining_area, meta(510, 0.873126377481))).
+event(lla(mihai, sitting, meta(511, 0.65))).
+sleep(1).
+event(pos(mihai, dining_area, meta(512, 1.0))).
+event(lla(mihai, sitting, meta(513, 0.746921479143))).
+sleep(1).
+event(pos(mihai, dining_area, meta(514, 0.938808593531))).
+event(lla(mihai, sitting, meta(515, 0.912517659239))).
+sleep(1).
+event(pos(mihai, dining_area, meta(516, 1.0))).
+event(lla(mihai, sitting, meta(517, 0.716247013705))).
+sleep(1).
+event(pos(mihai, dining_area, meta(518, 0.65))).
+event(lla(mihai, sitting, meta(519, 0.685549168803))).
+sleep(1).
+event(pos(mihai, dining_area, meta(520, 1.0))).
+event(lla(mihai, sitting, meta(521, 0.749807433781))).
+sleep(1).
+event(pos(mihai, dining_area, meta(522, 0.853014657602))).
+event(lla(mihai, sitting, meta(523, 0.65))).
+sleep(1).
+event(pos(mihai, dining_area, meta(524, 0.843183186521))).
+event(lla(mihai, sitting, meta(525, 0.827288557943))).
+sleep(1).
+event(pos(mihai, dining_area, meta(526, 0.87451184573))).
+event(lla(mihai, sitting, meta(527, 0.803370808277))).
+sleep(1).
+event(pos(mihai, dining_area, meta(528, 0.789422476553))).
+event(lla(mihai, sitting, meta(529, 1.0))).
+sleep(1).
+event(pos(mihai, dining_area, meta(530, 1.0))).
+event(lla(mihai, sitting, meta(531, 0.784650416257))).
+sleep(1).
+event(pos(mihai, dining_area, meta(532, 0.69767899691))).
+event(lla(mihai, sitting, meta(533, 1.0))).
+sleep(1).
+event(pos(mihai, dining_area, meta(534, 1.0))).
+event(lla(mihai, sitting, meta(535, 0.65))).
+sleep(1).
+event(pos(mihai, dining_area, meta(536, 0.894078702809))).
+event(lla(mihai, sitting, meta(537, 0.692338554821))).
+sleep(1).
+event(lla(mihai, sitting, meta(538, 0.906085885993))).
+sleep(1).
+event(pos(mihai, dining_area, meta(539, 0.707469522989))).
+event(lla(mihai, sitting, meta(540, 1.0))).
+sleep(1).
+event(lla(mihai, sitting, meta(541, 0.763725367365))).
+sleep(1).
+event(pos(mihai, dining_area, meta(542, 1.0))).
+event(lla(mihai, sitting, meta(543, 0.65))).
+sleep(1).
+event(pos(mihai, dining_area, meta(544, 0.845689402072))).
+event(lla(mihai, sitting, meta(545, 0.683277950517))).
+sleep(1).
+event(pos(mihai, dining_area, meta(546, 1.0))).
+sleep(1).
+event(pos(mihai, dining_area, meta(547, 0.934965854948))).
+event(lla(mihai, sitting, meta(548, 0.998386350026))).
+sleep(1).
+event(pos(mihai, dining_area, meta(549, 0.65))).
+event(lla(mihai, sitting, meta(550, 0.893927910068))).
+sleep(1).
+event(pos(mihai, dining_area, meta(551, 1.0))).
+event(lla(mihai, sitting, meta(552, 1.0))).
+sleep(1).
+event(pos(mihai, dining_area, meta(553, 0.930558151273))).
+event(lla(mihai, sitting, meta(554, 1.0))).
+
+
