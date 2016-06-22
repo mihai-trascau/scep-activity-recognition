@@ -13,6 +13,8 @@ HLA_TYPE = "hla"
 LLA_TYPE = "lla"
 POS_TYPE = "pos"
 
+COLORS = ['b', 'g', 'r', 'c', 'm', 'y', 'k']
+
 def parseDate(inputDate):
     dateComponents = [int(token.strip()) for token in re.split("\(|\)|,",inputDate.strip()) if token.strip().isdigit()]
     parsedDate = datetime.datetime(*dateComponents[:-1])
@@ -57,8 +59,10 @@ def plotEventStream(inputStream):
     # input_types, unique_idx, input_type_markers = np.unique(input_combos, 1, 1)
     # y = (input_type_markers + 1) / float(len(input_types) + 1)
 
+    # get positions of unique input_types
     user_input_types, indices = np.unique(input_combos[['input_type', 'user', 'input_value', 'start_time']], return_inverse = True)
 
+    # create reverse dict from unique input type index to indices in original array where the unique input type appears
     index_groups = {}
     for i in range(len(indices)):
         if indices[i] in index_groups:
@@ -66,15 +70,24 @@ def plotEventStream(inputStream):
         else:
             index_groups[indices[i]] = [i]
 
-
     unique_type_instances = {}
+    min_start_time = None
+
     for unique_idx in index_groups:
-        input_type = user_input_types[unique_idx]
+        # for each unique input type
         type_instances = input_combos[index_groups[unique_idx]]
 
+        # sort instances by interval length
         sorted_type_instances = sorted(type_instances, key = lambda input: float(input['end_time']) - float(input['start_time']), reverse=True)
-        max_type_instance = sorted_type_instances[0]
 
+        # get the max one
+        max_type_instance = sorted_type_instances[0]
+        if not min_start_time:
+            min_start_time = float(max_type_instance['start_time'])
+        elif float(max_type_instance['start_time']) < min_start_time:
+            min_start_time = float(max_type_instance['start_time'])
+
+        # create an input type key (which excludes the start times, i.e. all separate instances for the same input_type, user, input_value combination will be included in this list
         key = max_type_instance['input_type'] + "(" + max_type_instance['user'] + ", " + max_type_instance['input_value'] + ")"
         if key in unique_type_instances:
             unique_type_instances[key].append(max_type_instance)
@@ -95,19 +108,26 @@ def plotEventStream(inputStream):
     yticks = []
     y = 1
     for key in unique_type_instances:
+        # yticks are the same as the input type keys
         yticks.append(key)
 
         unique_type_instances[key] = sorted(unique_type_instances[key], key = lambda x: float(x['start_time']))
-        for instance in unique_type_instances[key]:
-            xticks.append(float(instance['start_time']))
-            xticks.append(float(instance['end_time']))
 
-            plt.hlines(y, float(instance['start_time']), float(instance['end_time']))
+        color_idx = 0
+        for instance in unique_type_instances[key]:
+            # xticks are start_time and end_time timestamps
+            xticks.append(float(instance['start_time']) - min_start_time)
+            xticks.append(float(instance['end_time']) - min_start_time)
+
+            plt.hlines(y, float(instance['start_time']) - min_start_time, float(instance['end_time']) - min_start_time, COLORS[(color_idx - 1) % len(COLORS)], lw = 3)
+
+            color_idx += 1
 
         y += 1
 
     xticks = sorted(xticks)
-    plt.xticks(xticks)
+
+    plt.xticks(xticks, rotation=90)
     plt.ylim(0, y)
     plt.yticks(range(1, y + 1), yticks)
     plt.xlabel('Time')
@@ -116,7 +136,6 @@ def plotEventStream(inputStream):
     plt.xlim(xticks[0] - delta, xticks[-1] + delta)
 
     plt.show()
-
 
 
     #Plot ok tl black
@@ -144,11 +163,11 @@ def plotEventStream(inputStream):
     # plt.xlabel('Time')
     # plt.show()
 
-#f = open("../single_hla_120s_01er_015fd.stream")
-g = open("../output.stream")
+f = open("../output2.stream")
+g = open("../output3.stream")
 p1 = Process(target=plotEventStream,args=([g]))
-#p2 = Process(target=plotEventStream,args=([f]))
+p2 = Process(target=plotEventStream,args=([f]))
 p1.start()
-#p2.start()
+p2.start()
 p1.join()
-#p2.join()
+p2.join()

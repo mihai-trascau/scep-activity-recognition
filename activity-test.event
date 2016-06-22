@@ -1,6 +1,6 @@
 %% print_trigger(_/_).
 %% print_trigger(all_defined_events).
-%% print_trigger(hla/_).
+print_trigger(hla/_).
 
 /*
     CONTEXT FLAGS
@@ -108,20 +108,25 @@ r_lla_2 'rule:' lla(U,X,meta(L2, Score))
 */
 
 %% TODO - Implement domain specific rules based on the complex events
+%% hla_max_rule_window(MaxTDiff),
+%% abs(TDiffEnd) =< MaxTDiff,
+%% abs(TDiffStart) =< MaxTDiff,
+%% L1 \= L2,
+
 hla_max_rule_window(2).
-hla_max_gap(2).
+hla_max_gap(5).
 
 r_hla_0 'rule:' hla(U,X,meta(L,ScoreHLA))
-    <-  (hla(U,X,meta(L1,Score1)) 'timestamp' t1(T1), t2(T2), writeln(format('caca maca at %2f', [L])))
+    <-  (hla(U,X,meta(L1,Score1)) 'timestamp' t1(T1), t2(T2))
         'par'
         (hla(U,X,meta(L2,Score2)) 'timestamp' t1(T3), t2(T4))
         'where' (
-            hla_max_rule_window(MaxTDiff),
-            datime_minus_datime(T2,T4,TDiffEnd),
-            abs(TDiffEnd) =< MaxTDiff,
-            datime_minus_datime(T1,T3,TDiffStart),
-            abs(TDiffStart) =< MaxTDiff,
-            L1 \= L2,
+            datime_minus_datime(T4,T2,TDiffEnd),
+            datime_minus_datime(T3,T1,TDiffStart),
+            %%((abs(TDiffStart) > 0, abs(TDiffEnd) >= 0) ; (abs(TDiffStart) >= 0, abs(TDiffEnd) > 0)),
+            %%abs(TDiffEnd) > 0,
+            L1 =\= L2,
+            %%T1 \= T3, T2 \= T4,
             L is max(L1,L2),
             aggr_score(Score1,Score2,ScoreHLA)
         ).
@@ -131,10 +136,10 @@ r_hla_7 'rule:' hla(U,X,meta(L,ScoreHLA))
         'seq'
         (hla(U,X,meta(L2,Score2)) 'timestamp' t1(T3), t2(T4))
         'where' (
-            datime_minus_datime(T2,T3,TGap),
+            datime_minus_datime(T3,T2,TGap),
             hla_max_gap(MaxTGap),
             TGap =< MaxTGap,
-            L1 \= L2,
+            %L1 \= L2,
             L is max(L1,L2),
             aggr_score(Score1,Score2,ScoreHLA)
         ).
