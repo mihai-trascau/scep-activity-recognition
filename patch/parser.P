@@ -105,6 +105,10 @@ tr_operators:-
 	op(1025,yfx, 'intersects'),
 	op(1025,yfx, 'Intersects'),
 	op(1025,yfx, 'INTERSECTS'),
+
+	op(1045,yfx, 'parneq'),
+	op(1045,yfx, 'Parneq'),
+	op(1045,yfx, 'PARNEQ'),
 	
 
 	op(1050,yfx, 'check'),
@@ -198,6 +202,10 @@ op_functor('NOT',notf).
 op_functor('intersects',intersectsf).
 op_functor('Intersects',intersectsf).
 op_functor('INTERSECTS',intersectsf).
+
+op_functor('parneq',parneqf).
+op_functor('Parneq',parneqf).
+op_functor('PARNEQ',parneqf).
 
 
 %%%%%%%%%%%%%%%% SAVING RULE ID	%%%%%%%%%%%%%
