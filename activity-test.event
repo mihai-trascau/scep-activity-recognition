@@ -118,15 +118,37 @@ hla_max_gap(5).
 
 r_hla_0 'rule:' hla(U,X,meta(L,ScoreHLA))
     <-  (hla(U,X,meta(L1,Score1)) 'timestamp' t1(T1), t2(T2))
-        'par'
+        'parneq'
         (hla(U,X,meta(L2,Score2)) 'timestamp' t1(T3), t2(T4))
+        %% 'check' (
+        %%     t1(T5), t2(T6), 
+        %%     write_term(T5, []),
+        %%     write_term(T6, []),
+        %%     write_term(T1, []),
+        %%     write_term(T2, []),
+        %%     write_term(T3, []),
+        %%     write_term(T4, []),
+        %%     datime_minus_datime(T6,T2,D1),
+        %%     datime_minus_datime(T5,T3,D2),
+        %%     abs(D1) > 0, abs(D2) > 0
+        %% )
+        %% 'check'(
+        %%     datime_minus_datime(T4,T2,TDiffEnd),
+        %%     datime_minus_datime(T3,T1,TDiffStart),
+        %%     write('------------------------\n'),
+        %%     write_term(TDiffStart, []),
+        %%     write_term(TDiffEnd, []),
+        %%     write('------------------------\n'),
+        %%     ((abs(TDiffStart) + abs(TDiffEnd)) > 0)
+        %% )
         'where' (
-            datime_minus_datime(T4,T2,TDiffEnd),
-            datime_minus_datime(T3,T1,TDiffStart),
-            %%((abs(TDiffStart) > 0, abs(TDiffEnd) >= 0) ; (abs(TDiffStart) >= 0, abs(TDiffEnd) > 0)),
-            %%abs(TDiffEnd) > 0,
-            L1 =\= L2,
-            %%T1 \= T3, T2 \= T4,
+            %% datime_minus_datime(T4,T2,TDiffEnd),
+            %% datime_minus_datime(T3,T1,TDiffStart),
+            %% ((abs(TDiffStart) + abs(TDiffEnd)) > 0),
+            %% write('caca maca'),
+            %% less_datime(T3, T2),
+            %% less_datime(T1, T3),
+            %% less_datime(T2, T4),
             L is max(L1,L2),
             aggr_score(Score1,Score2,ScoreHLA)
         ).
